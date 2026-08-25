@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta lang="en">
+<html>
+    <head>
+        <title>Home Page</title>
+        <link  rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/card.css">
+       
+    </head>
+    <body>
+        <%-include("partial/header.ejs") %>
+        <div class="container">
+            <div class="sidebar">
+
+            </div>
+            <div class="mainBody">
+                
+                <% if(locals.data){ %>
+                 <%for(let i = 0; i < data.length; i++){ %>
+                    
+                <div class="card" onClick = "window.location.href='/moreDetail/<%=data[i]._id %>'">
+                    <h4><%=data[i].name %></h4>
+                    <div class="box-1">
+                        <p ><%=data[i].type%></p>
+                        <p class="price"><%=data[i].priceMonthly%>$ | <%=data[i].priceYearly%>$</p>
+                    </div>
+                    <img src=<%=data[i].imgUrl %> alt="car Image">
+                    <div class="info">
+                        <div class="item">
+
+                        </div>
+                    </div>"
+                    
+                        <p><%=data[i].description %></p>
+                   
+                </div>
+                <% }} %>
+            </div>
+
+        </div>
+  
+    </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin</title>
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/form.css">
+    </head>
+    <body>
+        <%-include("partial/header.ejs") %>
+    <div class="container">
+        <div class="sidebar">
+            <div class="filter">
+                <div class="fiterByType">
+                    <h2>Filters</h2>
+                    <input type="checkbox" name="suv">
+                </div>
+                <div class="filterByPrice">
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="mainBody">
+            <form action="/addCar" method="post" enctype="multipart/form-data">
+            <div class="entrys">
+                <label for="name">Name </label>
+                <input type="text" name="name" placeholder="name"/>
+            </div>
+            <div class="entrys">
+                <label for="model">Model: </label>
+                <input type="text"  name="model" placeholder="model">
+            </div>
+            <div class="entrys">
+                 <label for="type">Type</label>
+                <input type="radio" name="type" value="sedan">sedan
+                <input type="radio" name="type" value="suv">suv
+                <input type ="radio" name="type" value="minivan">minivan
+            </div>
+            <div class="entrys">
+                <label>Descriptoin</label>
+                <input type="text" name="description" placeholder="enter cars description">
+            </div>
+            
+            <div class="entrys">
+                <input type="file" name="file" accept="image/*">
+            </div>
+            <div class="fuelType">
+                <label>Fuel type</label>
+                <input type="radio" name="fuelType" value="Diesel">Diesel
+                <input type="radio" name="fuelType" value="Elecric">Electric
+                
+            </div> 
+            <div class="entrys">
+                <label>Capacity</label>
+                <input type= "number" name="capacity" placeholder="capacity">
+            </div>
+            <div class="entrys">
+                 <label for="shitfing">Shifting </label>
+                <input type="radio" name="shifting" value="automatic">
+                <input type="radio" name="shifting" value="manual">Manual
+            </div>
+           
+            <div class="entrys">
+                <input type="text" name="priceYearly" placeholder="yearly renting price">
+            </div>
+
+            <div class="entrys">
+                <input type="text" name="priceMonthly" placeholder="monthly renting price">
+            </div>
+
+            <div class="entrys">
+                <input type="number" name="milage" placeholder="milage">
+            </div>
+            
+            <div class="entrys">
+                <label for="seat_warmer">Sit Warmer</label>
+            <input type="checkbox" id="sit" value="Sit warmer" name="feature">
+
+            <label for="ac">Ac</label>
+            <input type="checkbox" id="ac" value="Ac" name="feature">
+
+            <label for="door">Assisted Parking</label>
+            <input type="checkbox" id="door" value="Assisted Parking" name="feature">
+
+            <label for="door">Adapative Cruise Control</label>
+            <input type="checkbox" id="door" value="Adapative Cruise Control" name="feature">
+
+            <label for="door">Automatic Braking Ssytem</label>
+            <input type="checkbox" id="door" value="Automatic Breaking System" name="feature">
+
+            <label for="door">Push Button Start & Keyless Entry</label>
+            <input type="checkbox" id="door" value="Push Button Start & Keyless Entry" name="feature">
+            </div>
+            <button type="submit">Submit</button>
+
+            </form>
+        </div>
+        
+    </div>
+            
+       
+    </body>
+</html>

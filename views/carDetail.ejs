@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <% if(locals.data){ %>
+            <div class="details">
+                <p><%=data.name%></p>
+                <p><%=data.type%></p>
+                <p>Model: <%= data.model %></p>
+                <p>Type: <%= data.type %></p>
+                <p>description: <%=data.description%></p>
+                <p>capacity: <%=data.capacity%></p>
+                
+                <img src="<%=data.imgUrl %>">
+                <p>feautures: <%=data.feautures%></p>
+                <p>fuelType: <%=data.fuelType %></p>
+                <p>price yearly <%= data.priceYearly %></p>
+                <p>priceMontly <%= data.priceMonthly %></p>
+                <p>milage: <%= data.milage %></p>
+                <p></p>
+               
+            </div>
+            <% } %>
+            <form action="/orderCar" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="carId" value="<%=data._id%>">
+                <input type="text" name="fullname" placeholder="fullname">
+                <input type="tel" name="phone" placeholder="eg.+251-xxx">
+                <input type="file" name="receipt" accept="image/*">
+                <input type="date" name="pickupDate">
+                <input type="date" name="dropoffDate">
+                <button type="submit">Order</button>
+            </form>
+    </body>
+
+</html>

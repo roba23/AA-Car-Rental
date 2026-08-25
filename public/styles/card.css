@@ -1,0 +1,53 @@
+.card{
+    align-self: center;
+    width:250px;
+    height: fit-content;
+    min-height: 300px;
+    
+    border-radius: calc(300px * 0.06);
+    padding: 5px;
+    background: rgb(234, 234, 227);
+    margin: 5px;
+    
+}
+.card > h4{
+    margin-top: 5px;
+    margin-bottom:0;
+    font-size: 25px;
+    font-family: 'Arial Black', 'Arial Bold', sans-serif;    
+}
+.card > .box-1{
+    margin-top: -20spx;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(90, 83, 83);
+    
+    
+}
+.box-1, .info{
+    font-family:  sans-serif;
+
+}
+.card > .info{
+    color: rgb(90, 83, 83);
+    font-size: 14px;
+}
+.card > .box-1 > .price{
+    color: rgb(23, 23, 255);
+}
+
+.card > img{
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+    margin-left: -5px;
+    
+}
+
+.card:hover{
+    box-shadow: 5px 5px rgb(200, 198, 198) ;
+}
+
+.visited-card{
+    background: black;
+}
