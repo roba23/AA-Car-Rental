@@ -8,4 +8,5 @@ router.post("/addCar", multer.single('file'),carController.addCar);
 router.get("/moreDetail/:id", carController.moreDetail);
 router.get("/admin", carController.adminPage);
 router.post("/orderCar",multer.single('receipt'), carController.orderCar);
+router.post("/search", carController.search);
 export default router;

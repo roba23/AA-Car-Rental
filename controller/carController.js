@@ -21,14 +21,14 @@ export default {
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
                 data = await car.find({type: filter});
-                return res.render("homepage.ejs", {data: data});
+                return res.render("homepage.ejs", {data: data, selectedFilter: filter});
 
             }
 
            
             
             data = await car.find({});
-            return res.render("homePage.ejs", {data: data, order: order});
+            return res.render("homePage.ejs", {data: data, selectedFilter: ''});
             
             
             
@@ -170,5 +170,12 @@ export default {
         
         }
     },
+    async search(req,res){
+        console.log("the body is:", req.body);
+        let {search} = req.body;
+        
+        let data = await car.find({name: {$regex: req.body.search, $options: "i"}});
+        res.render("homePage.ejs", {data: data, selectedFilter: ''});
+    }
     
 };

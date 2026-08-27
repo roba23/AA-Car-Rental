@@ -12,19 +12,23 @@
         <div class="container">
             <div class="sidebar">
                 <div class="filter">
-                    <h2>Fiter</h2>
+                    <h2>Fiter By</h2>
                     <h3>Type</h3>
                     <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=suv'}})(this)">suv
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=suv'}})(this)"
+                        <%= selectedFilter === 'suv' ? 'checked' : '' %>>suv
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=hatchback'}})(this)">hatchback
+                        <input type="checkbox" name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=hatchback'}})(this)"
+                        <%= selectedFilter === 'hatchback' ? 'checked' : '' %>>hatchback
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=sedan'}})(this)">sedan
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=sedan'}})(this)"
+                        <%= selectedFilter === 'sedan' ? 'checked' : '' %>>sedan
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=pickup'}})(this)">Pickup
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=pickup'}})(this)"
+                        <%= selectedFilter === 'pickup' ? 'checked' : '' %>>Pickup
                     </div>
                     <h3>Price</h3>
                     <div class="entrys">

@@ -4,7 +4,7 @@
 body{
     display: grid;
     grid-template-rows: 10vh 90vh;
-   
+    position: relative;
     padding: 0;
     margin: 0;
 }
@@ -16,7 +16,11 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-
+    position: sticky;
+    top:0;
+    left: 0;
+    z-index: 5;
+    background: white;
 }
 
 .navigation > img{
@@ -48,8 +52,20 @@ body{
     background: rgb(16,12,12);
     color: white;
 }
-.searchBar > input{
-    height: 35px;
+.searchBar  input{
+    height: 40px;
+    border-radius: 10px;
+}
+.searchBar  button{
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+.searchBar button:hover{
+    cursor: pointer;
+    background: white;
+    color: black;
 }
 .container{
     background-color: white;
@@ -59,6 +75,8 @@ body{
 .sidebar{
    border-right: 30px solid rgb(234, 234, 227);
    border-bottom: 30px solid rgb(234, 234, 227);
+  
+   
 
 }
 .mainBody{
@@ -70,7 +88,31 @@ body{
     padding: 20px;
     row-gap: 10px;
     column-gap: 30px;
-    border-bottom: 30px solid rgb(200, 198, 198);
+    border-bottom: 30px solid rgb(234, 234, 227);
+    padding-bottom: 40px;
+    
+}
 
+.filter{
+    border: 2px solid rgb(200,198,198);
+    max-width: 250px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(61, 60, 60);
+    font-size: 18px;
+    border-radius: 20px;
+    position: fixed;
+    left: 20px;
+    
+}
+.filter h2{
+    text-align: center;
+    color: rgb(40, 39, 39);
+    margin:0;
+   
+}
+.filter h3{
+    color: rgb(45, 43, 43);
 }
 
