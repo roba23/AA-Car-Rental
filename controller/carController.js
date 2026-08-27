@@ -28,7 +28,7 @@ export default {
            
             
             data = await car.find({});
-            return res.render("homePage.ejs", {data: data, order: order});
+            return res.render("homePage.ejs", {data: data, selectedFilter: ''});
             
             
             
