@@ -28,16 +28,16 @@ export default {
            
             
             data = await car.find({});
-            return res.render("homePage.ejs", {data: data, selectedFilter: ''});
+            return res.render("homePage.ejs", {data: data, order: order});
             
             
             
         }
         catch(error){
-             console.log("Error caught in addCar catch block:");
+             console.log("Error caught in getHomepage catch block:");
             return res.status(500).json({
                 success: false,
-                message: "Failed to create car entry.",
+                message: "failed to render gethomepage.",
                 error: error.message
             });
         }
@@ -155,6 +155,7 @@ export default {
                 pickupDate: req.body.pickupDate,
                 dropoffDate: req.body.dropoffDate,
                 carId: req.body.carId,
+                
                 
             });
             res.redirect("/");

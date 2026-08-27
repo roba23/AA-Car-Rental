@@ -1,12 +1,12 @@
 .card{
     align-self: center;
-    width:250px;
+    width: max-content;
     height: fit-content;
     min-height: 300px;
     
     border-radius: calc(300px * 0.06);
     padding: 5px;
-    background: rgb(234, 234, 227);
+    background: rgb(248, 248, 244);
     margin: 5px;
     
 }
