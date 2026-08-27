@@ -56,7 +56,11 @@ const carSchema = new mongoose.Schema({
     feautures:{
         type: Array,
         
-    }
+    },
+     rented:{
+        type: Boolean,
+        default: false
+     }
         
 
 });

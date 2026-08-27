@@ -10,9 +10,44 @@
     <body>
         <%-include("partial/header.ejs") %>
         <div class="container">
-            <div class="sidebar">
+             <div class="sidebar">
+                <div class="filter">
+                    <h2>Filter By</h2>
+                    
+                    <h3>Car Type</h3>
+                    <div class="entrys">
+                        <input type="checkbox" name="typeFilter" value="Hatchback">hatchback
+                    </div>
+                    <div class="etnrys">
+                        <input type="checkbox" name="typeFilter" value="Coupe">coupe
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" name="typeFilter" value="Convertible">convertible
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" name="typeFilter" value="Wagon">wagons
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" name="typeFilter" value="Crossover">crossovers
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" name="typeFilter" value="Pickup">pickup
+                    </div>
+                    <h3>Price</h3>
+                    <div class="entrys">
+                        <input type="checkbox" name="priceFilter" value="[10000,50000]">$10,000 - $50,000
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" name="priceFilter" value="[50000, 100000]">$50,000 - $100,000
+                    </div>
+                </div>
+                <div class="filterByPrice">
 
+                </div>
             </div>
+            
+
+
             <div class="mainBody">
                 
                 <% if(locals.data){ %>
@@ -29,12 +64,18 @@
                         <div class="item">
 
                         </div>
-                    </div>"
+                    </div>
                     
                         <p><%=data[i].description %></p>
                    
                 </div>
-                <% }} %>
+                <% }%>
+                
+                <% } %>
+                
+            </div>
+            <div class="pageNavigation">
+                <button>1</button> / <button>2</button>
             </div>
 
         </div>
