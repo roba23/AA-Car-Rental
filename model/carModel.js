@@ -39,10 +39,7 @@ const carSchema = new mongoose.Schema({
        min: 2,
         required: true
     },
-  priceYearly: {
-        type: Number,
-        required: true
-    },
+  
     shifting: {
         type: String,
         required: true,
