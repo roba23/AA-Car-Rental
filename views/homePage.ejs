@@ -10,46 +10,46 @@
     <body>
         <%-include("partial/header.ejs") %>
         <div class="container">
-             <div class="sidebar">
+            <div class="sidebar">
                 <div class="filter">
-                    <h2>Filter By</h2>
-                    
-                    <h3>Car Type</h3>
+                    <h2>Fiter By</h2>
+                    <h3>Type</h3>
                     <div class="entrys">
-                        <input type="checkbox" name="typeFilter" value="Hatchback">hatchback
-                    </div>
-                    <div class="etnrys">
-                        <input type="checkbox" name="typeFilter" value="Coupe">coupe
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=suv'}})(this)"
+                        <%= selectedFilter === 'suv' ? 'checked' : '' %>>suv
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" name="typeFilter" value="Convertible">convertible
+                        <input type="checkbox" name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=hatchback'}})(this)"
+                        <%= selectedFilter === 'hatchback' ? 'checked' : '' %>>hatchback
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" name="typeFilter" value="Wagon">wagons
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=sedan'}})(this)"
+                        <%= selectedFilter === 'sedan' ? 'checked' : '' %>>sedan
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" name="typeFilter" value="Crossover">crossovers
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox" name="typeFilter" value="Pickup">pickup
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=pickup'}})(this)"
+                        <%= selectedFilter === 'pickup' ? 'checked' : '' %>>Pickup
                     </div>
                     <h3>Price</h3>
                     <div class="entrys">
-                        <input type="checkbox" name="priceFilter" value="[10000,50000]">$10,000 - $50,000
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=100&filter=1000'}})(this)">$100 - $1,000
                     </div>
                     <div class="entrys">
-                        <input type="checkbox" name="priceFilter" value="[50000, 100000]">$50,000 - $100,000
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=1000&filter=10000'}})(this)">$1,000 - $10,000
                     </div>
-                </div>
-                <div class="filterByPrice">
-
+                    <div class="entrys">
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=10000&filter=50000'}})(this)">$10,000 - $50,000
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=50000&filter=100000'}})(this)">$50,000 - $100,000
+                    </div>
                 </div>
             </div>
             
 
 
             <div class="mainBody">
-                
+                <%# This is bereket pull request %>
                 <% if(locals.data){ %>
                  <%for(let i = 0; i < data.length; i++){ %>
                     
@@ -57,7 +57,7 @@
                     <h4><%=data[i].name %></h4>
                     <div class="box-1">
                         <p ><%=data[i].type%></p>
-                        <p class="price"><%=data[i].priceMonthly%>$ | <%=data[i].priceYearly%>$</p>
+                        <p class="price"><%=data[i].priceMonthly%>$/Month</p>
                     </div>
                     <img src=<%=data[i].imgUrl %> alt="car Image">
                     <div class="info">

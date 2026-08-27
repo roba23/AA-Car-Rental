@@ -10,16 +10,25 @@ let data;
 export default {
     async getHomePage(req,res){
         try{
+             let {filter} = req.query;
+            if(Array.isArray(filter)){
+                 console.log("fitler is:", filter);
           
+                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}});
+                return res.render("homePage.ejs", {data: data});
+            
+            }
+            if(typeof filter === 'string'){
+                console.log("filter is:", filter);
+                data = await car.find({type: filter});
+                return res.render("homepage.ejs", {data: data, selectedFilter: filter});
+
+            }
+
+           
+            
             data = await car.find({});
-            if(!data){
-                data = await car.find({});
-                res.render("homePage.ejs", {data: data});
-            }
-            else{
-                console.log("already fetched no need to refetch");
-                res.render("homePage.ejs", {data: data});
-            }
+            return res.render("homePage.ejs", {data: data, order: order});
             
             
             
@@ -162,5 +171,12 @@ export default {
         
         }
     },
+    async search(req,res){
+        console.log("the body is:", req.body);
+        let {search} = req.body;
+        
+        let data = await car.find({name: {$regex: req.body.search, $options: "i"}});
+        res.render("homePage.ejs", {data: data, selectedFilter: ''});
+    }
     
 };
