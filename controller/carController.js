@@ -21,7 +21,7 @@ export default {
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
                 data = await car.find({type: filter});
-                return res.render("homepage.ejs", {data: data});
+                return res.render("homepage.ejs", {data: data, selectedFilter: filter});
 
             }
 
@@ -29,16 +29,6 @@ export default {
             
             data = await car.find({});
             return res.render("homePage.ejs", {data: data, order: order});
-          
-            data = await car.find({});
-            if(!data){
-                data = await car.find({});
-                res.render("homePage.ejs", {data: data});
-            }
-            else{
-                console.log("already fetched no need to refetch");
-                res.render("homePage.ejs", {data: data});
-            }
             
             
             
@@ -181,5 +171,12 @@ export default {
         
         }
     },
+    async search(req,res){
+        console.log("the body is:", req.body);
+        let {search} = req.body;
+        
+        let data = await car.find({name: {$regex: req.body.search, $options: "i"}});
+        res.render("homePage.ejs", {data: data, selectedFilter: ''});
+    }
     
 };
