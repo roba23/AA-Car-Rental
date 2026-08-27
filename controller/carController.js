@@ -6,13 +6,28 @@ import sharp from "sharp";
 import order from "../model/orderModel.js";
 const app = express();
 app.use(express.static("public"));
-
+let data;
 export default {
     async getHomePage(req,res){
         try{
-           let data = await car.find({});
+             let {filter} = req.query;
+            if(Array.isArray(filter)){
+                 console.log("fitler is:", filter);
+          
+                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}});
+                return res.render("homePage.ejs", {data: data});
+            
+            }
+            if(typeof filter === 'string'){
+                console.log("filter is:", filter);
+                data = await car.find({type: filter});
+                return res.render("homepage.ejs", {data: data});
+
+            }
+
            
             
+            data = await car.find({});
             return res.render("homePage.ejs", {data: data, order: order});
             
             
