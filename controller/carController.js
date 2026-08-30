@@ -12,7 +12,6 @@ export default {
         try{
              let {filter} = req.query;
             if(Array.isArray(filter)){
-                 console.log("fitler is:", filter);
           
                 data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}});
                 return res.render("homePage.ejs", {data: data});
@@ -111,9 +110,7 @@ export default {
     async moreDetail(req,res){
         try{
             const id = req.params.id;
-            console.log("id:", id);
             const data = await car.findById({_id: id});
-            console.log("selected car :", data);
             res.render("cardetail.ejs", {data: data});
         }
         catch(error){
@@ -172,7 +169,7 @@ export default {
         }
     },
     async search(req,res){
-        console.log("the body is:", req.body);
+        
         let {search} = req.body;
         
         let data = await car.find({name: {$regex: req.body.search, $options: "i"}});

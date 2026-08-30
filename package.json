@@ -1,13 +1,18 @@
 {
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.3.0",
     "cloudinary": "^2.10.1",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "mongodb": "^7.5.0",
     "mongoose": "^9.9.3",
     "multer": "^2.2.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "sharp": "^0.35.3",
     "streamifier": "^0.1.1"
   },

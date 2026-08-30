@@ -30,3 +30,11 @@ input[type="text"]:hover, input[type="number"]:hover{
    border-radius: 10px;
    padding: 30px;
 }
+.sidebar{
+    display: flex;
+    flex-direction: column;
+}
+.sidebar button{
+    width: inherit;
+    font-size:20px;
+}

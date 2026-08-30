@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="/styles/register.css">
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="greeter">
+                <p>Register an account to
+                    easily book and rent cars
+                    with a click of a button
+                </p>
+            
+            </div>
+            <div class="form_container">
+                <form action="/user/register" method="post" enctype="multipart/form-data">
+                    <h2>Register</h2>
+                    <label for="fullname">
+                Fullname<input type="text" name="fullname">
+            </label>
+            <label for="age">
+                Age<input type="numer" name="age">
+            </label>
+            <label for="email">
+                Email<input type="email" name="email" placeholder="example@gmail.com">
+            </label>
+            <label for="phone">
+                Phone:<input type="text" name="phone">
+            </label>
+            <label for="birthDate">
+                BirthDate:<input type="date" name="birthDate">
+            </label>
+            <label for="profile_pic">
+                Profile Picture<input type="file" name="profile_pic" accept="image/*">
+            </label>
+            <label for="password">
+                Password:<input type="password" name="password">
+            </label>
+            <button type="submit">Register</button>
+            <p>Already have an account <a href="/user/login">Login</a></p>
+        </form>
+        
+
+            </div>
+            
+       
+
+        </div>
+        
+
+    </body>
+</html>

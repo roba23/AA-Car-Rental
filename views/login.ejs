@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="/styles/login.css">
+
+    </head>
+    <body>
+     <div class="container">
+        <div class="greeter">
+            <p>Welcome to rent-a-car we have a wide selection of cars
+                to choose from simply login and order a car
+            </p>
+
+        </div>
+        <div class="form_container">
+            <form method="post" action="/user/login">
+            <h2>Login</h2>
+            <label for="email">Email</label>
+            <input type="text" name="email" placeholder="email">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="password">
+            <button type="submit">Login</button>
+            <% if(locals.error){ %>
+            <p style="color:red;">Error: <%=error %></p>
+            <% } %>
+            Don't have an account <a href="/user/register">Register</a>
+        
+
+
+        </form>
+
+        
+        </div>
+        
+      </div>
+       
+    </body>
+</html>

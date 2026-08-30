@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import 'dotenv/config';
-const url = "mongodb+srv://eyoelsinore7_db_user:LYXpggvTqVdXFPBk@cluster0.tg0l2bi.mongodb.net/?appName=Cluster0";
 
 
-//const url = `mongodb://127.0.0.1:27017/${process.env.dbName}`;
+
+const url = process.env.MONGO_URL;
 console.log("the url is:", url);
 const dbConnection = mongoose.createConnection(url, {
    
