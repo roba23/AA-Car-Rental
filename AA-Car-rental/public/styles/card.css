@@ -1,14 +1,14 @@
 .card{
     align-self: center;
-    width: max-content;
+    width:250px;
     height: fit-content;
     min-height: 300px;
-
+    
     border-radius: calc(300px * 0.06);
     padding: 5px;
-    background: rgb(248, 248, 244);
+    background: rgb(234, 234, 227);
     margin: 5px;
-
+    
 }
 .card > h4{
     margin-top: 5px;

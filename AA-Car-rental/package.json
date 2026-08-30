@@ -5,7 +5,10 @@
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+<<<<<<< HEAD
+=======
     "method-override": "^3.0.0",
+>>>>>>> e5d9f9a (i added a new order controller file to you)
     "mongodb": "^7.5.0",
     "mongoose": "^9.9.3",
     "multer": "^2.2.0",
