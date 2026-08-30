@@ -136,5 +136,75 @@ export default {
             });
         }
     },
+    async moreDetail(req,res){
+        try{
+            const id = req.params.id;
+            console.log("id:", id);
+            const data = await car.findById({_id: id});
+            console.log("selected car :", data);
+            res.render("cardetail.ejs", {data: data});
+        }
+        catch(error){
+            console.error("getCar:", error);
+        }
+    },
+    async orderCar(req,res){
+        try{
+            
+            if (!req.file) {
+                return res.status(400).send('No file uploaded.');
+            }
+            
+            // 1. Compress the image buffer
+            const resizedBuffer = await sharp(req.file.buffer)
+                .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
+                .jpeg({ quality: 80 }) 
+                .toBuffer();
+            
+            // 2. Upload the compressed buffer directly to Cloudinary
+            const result =  await  new Promise((resolve, reject) => {
+                let stream =  cloudinary.uploader.upload_stream(
+                    { folder: 'car_images' },
+                    (error, result) => {
+                        // FIX: Added 'return' keywords back to guarantee Promise completion
+                        if (result)  resolve(result);
+                        else  reject(error);
+                    }
+                );
+                streamifier.createReadStream(resizedBuffer).pipe(stream);
+
+            });
+
+            await order.create({
+                fullname: req.body.fullname,
+                phone: req.body.phone,
+                receipt: result.secure_url,
+                cloudinaryId: result.pulic_id,
+                pickupDate: req.body.pickupDate,
+                dropoffDate: req.body.dropoffDate,
+                carId: req.body.carId,
+                
+                
+            });
+            res.redirect("/");
+
+        }
+        catch(error){
+            console.log("Error caught in addCar catch block:");
+            return res.status(500).json({
+                success: false,
+                message: "Failed to create car entry.",
+                error: error.message
+            });
+        
+        }
+    },
+    async search(req,res){
+        console.log("the body is:", req.body);
+        let {search} = req.body;
+        
+        let data = await car.find({name: {$regex: req.body.search, $options: "i"}});
+        res.render("homePage.ejs", {data: data, selectedFilter: ''});
+    }
     
 };
