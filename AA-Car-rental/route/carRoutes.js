@@ -1,19 +1,19 @@
 import carController from "../controller/carController.js";
+<<<<<<< HEAD
+=======
 import orderController from "../controller/orderController.js"
+>>>>>>> e5d9f9a (i added a new order controller file to you)
 import express from "express";
 import multer from "../middleware/multer.js";
-import {isloggedin, isAdmin} from "../middleware/authentication.js";
 const router = express.Router();
 
+router.get("/", carController.getHomePage);
 <<<<<<< HEAD
-router.get("/", isloggedin, carController.getHomePage);
 router.post("/addCar", multer.single('file'),carController.addCar);
 router.get("/moreDetail/:id", carController.moreDetail);
-router.get("/admin", isloggedin, isAdmin, carController.adminPage);
+router.get("/admin", carController.adminPage);
 router.post("/orderCar",multer.single('receipt'), carController.orderCar);
-router.post("/search", carController.search);
 =======
-router.get("/", carController.getHomePage);
 router.get("/moreDetail/:id", carController.moreDetail);
 router.get("/admin", carController.adminPage);
 router.get('/orders', orderController.getOrderMessage)
@@ -24,5 +24,5 @@ router.post('/postCars/order', multer.single('receipt'), orderController.makeOrd
 
 router.put('/order/:id', orderController.acceptOrder)
 
->>>>>>> 8f673cb66ecf6445b1381a76c902dd74ecf02f7a
+>>>>>>> e5d9f9a (i added a new order controller file to you)
 export default router;

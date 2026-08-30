@@ -23,6 +23,17 @@
                
             </div>
             <% } %>
+<<<<<<< HEAD
+            <form action="/orderCar" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="carId" value="<%=data._id%>">
+                <input type="text" name="fullname" placeholder="fullname">
+                <input type="tel" name="phone" placeholder="eg.+251-xxx">
+                <input type="file" name="receipt" accept="image/*">
+                <input type="date" name="pickupDate">
+                <input type="date" name="dropoffDate">
+                <button type="submit">Order</button>
+            </form>
+=======
 
             <div>
                 <form action="/postCars/order" method="post" enctype="multipart/form-data">

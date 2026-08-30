@@ -11,7 +11,7 @@
         <%-include("partial/header.ejs") %>
         <div class="container">
             <div class="sidebar">
-                <div class="filter">
+                     <div class="filter">
                     <h2>Fiter By</h2>
                     <h3>Type</h3>
                     <div class="entrys">
@@ -44,38 +44,34 @@
                         <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=50000&filter=100000'}})(this)">$50,000 - $100,000
                     </div>
                 </div>
+
             </div>
-            
-
-
             <div class="mainBody">
                 <%# This is bereket pull request %>
                 <% if(locals.data){ %>
-                 <%for(let i = 0; i < data.length; i++){ %>
+                 <% data.forEach(data => { %>
                     
-                <div class="card" onClick = "window.location.href='/moreDetail/<%=data[i]._id %>'">
-                    <h4><%=data[i].name %></h4>
+                <div class="card" onClick = "window.location.href='/moreDetail/<%=data._id %>'">
+                    <small style="position: relative; top: 0; right: 1%; background-color: <%= ( data.orderId && data.orderId.Status ) ? 'green' : 'red' %>; color: white;">
+                        <%= ( data.orderId && data.orderId.Status ) ? "Out" : "Available" %> 
+                    </small>
+
+                    <h4><%=data.name %></h4>
                     <div class="box-1">
-                        <p ><%=data[i].type%></p>
-                        <p class="price"><%=data[i].priceMonthly%>$/Month</p>
+                        <p ><%=data.type%></p>
+                        <p class="price">$<%=data.priceMonthly%>/month</p>
                     </div>
-                    <img src=<%=data[i].imgUrl %> alt="car Image">
+                    <img src=<%= data.imgUrl %> alt="car Image">
                     <div class="info">
                         <div class="item">
 
                         </div>
-                    </div>
+                    </div>"
                     
-                        <p><%=data[i].description %></p>
+                        <p><%=data.description %></p>
                    
                 </div>
-                <% }%>
-                
-                <% } %>
-                
-            </div>
-            <div class="pageNavigation">
-                <button>1</button> / <button>2</button>
+                <% })} %>
             </div>
 
         </div>

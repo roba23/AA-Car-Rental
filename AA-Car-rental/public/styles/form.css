@@ -1,0 +1,32 @@
+.mainBody .entrys{
+    display: flex;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.mainBody > form label{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.mainBody .entrys > input[type="text"], .mainBody .entrys > input[type="number"]{
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    
+    border-radius: 10px;
+    min-width: 200px;
+}
+input[type="text"]:hover, input[type="number"]:hover{
+   
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.mainBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainBody form{
+   border: 2px solid rgb(193, 183, 183);
+   border-radius: 10px;
+   padding: 30px;
+}

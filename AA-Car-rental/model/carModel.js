@@ -9,7 +9,11 @@ const carSchema = new mongoose.Schema({
     imgUrl:{
         type: String,
        required: true
+<<<<<<< HEAD
+},
+=======
     },
+>>>>>>> e5d9f9a (i added a new order controller file to you)
     model: {
         type: Number,
         required: true
@@ -24,7 +28,11 @@ const carSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
+<<<<<<< HEAD
+},
+=======
     },
+>>>>>>> e5d9f9a (i added a new order controller file to you)
     fuelType: {
        type: String,
         required: true
@@ -39,14 +47,34 @@ const carSchema = new mongoose.Schema({
        min: 2,
         required: true
     },
+<<<<<<< HEAD
+  priceYearly: {
+        type: Number,
+        required: true
+    },
     shifting: {
         type: String,
         required: true,
+       
+
+=======
+    shifting: {
+        type: String,
+        required: true,
+>>>>>>> e5d9f9a (i added a new order controller file to you)
     },
     milage:{
         type: Number,
         required: true
     },
+<<<<<<< HEAD
+    feautures:{
+        type: Array,
+        
+    }
+        
+
+=======
     features:{
         type: Array,
         
@@ -61,6 +89,7 @@ const carSchema = new mongoose.Schema({
         default: Date.now
     }
         
+>>>>>>> e5d9f9a (i added a new order controller file to you)
 });
 
 const car = dbConnection.model('cars', carSchema);

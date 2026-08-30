@@ -3,47 +3,54 @@ import express from "express";
 import cloudinary from "../middleware/cloudinary.js";
 import streamifier from "streamifier";
 import sharp from "sharp";
+<<<<<<< HEAD
+import order from "../model/orderModel.js";
+=======
+>>>>>>> e5d9f9a (i added a new order controller file to you)
 const app = express();
 app.use(express.static("public"));
 
 export default {
+<<<<<<< HEAD
+    async getHomePage(req,res){
+        try{
+           let data = await car.find({});
+           
+            
+            return res.render("homePage.ejs", {data: data, order: order});
+            
+            
+            
+=======
 
     async getHomePage(req,res){
         try{
            let data = await car.find({}).populate('orderId').sort({createdAt: 'desc'}).lean();
 
-            let {filter} = req.query;
-            if(Array.isArray(filter)){
-          
-                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}});
-                return res.render("homePage.ejs", {data: data});
-            
-            }
-            if(typeof filter === 'string'){
-                console.log("filter is:", filter);
-                data = await car.find({type: filter});
-                return res.render("homepage.ejs", {data: data, selectedFilter: filter});
+            return res.render("homePage.ejs", {data: data});
 
-            }
-
-           
-            
-            data = await car.find({});
-            return res.render("homePage.ejs", {data: data, selectedFilter: ''});
-            
-            
-            
+>>>>>>> e5d9f9a (i added a new order controller file to you)
         }
         catch(error){
-             console.log("Error caught in getHomepage catch block:");
+             console.log("Error caught in addCar catch block:");
             return res.status(500).json({
                 success: false,
-                message: "failed to render gethomepage.",
+<<<<<<< HEAD
+                message: "Failed to create car entry.",
+=======
+                message: "Page Not_Found.",
+>>>>>>> e5d9f9a (i added a new order controller file to you)
                 error: error.message
             });
         }
-
+        
     },
+<<<<<<< HEAD
+    async adminPage(req,res){
+        res.render("adminPage.ejs");
+    },
+        async addCar(req,res){
+=======
 
     async moreDetail(req,res){
         try{
@@ -75,6 +82,7 @@ export default {
     },
 
     async addCar(req,res){
+>>>>>>> e5d9f9a (i added a new order controller file to you)
         try{
             if (!req.file) {
                 return res.status(400).send('No file uploaded.');
@@ -101,8 +109,13 @@ export default {
             });
            
            
+<<<<<<< HEAD
+           const feauturesArray = req.body.feature;
+           console.log(feauturesArray);
+=======
            const featuresArray = req.body.feature;
            console.log(featuresArray);
+>>>>>>> e5d9f9a (i added a new order controller file to you)
             
             
             // 3. Database operation will now run successfully
@@ -119,7 +132,11 @@ export default {
                 priceMonthly: req.body.priceMonthly,
                 priceYearly: req.body.priceYearly,
                 milage: req.body.milage,
+<<<<<<< HEAD
+                feautures: feauturesArray,
+=======
                 features: featuresArray,
+>>>>>>> e5d9f9a (i added a new order controller file to you)
             });
             
             console.log("Database write successful:", m);
@@ -135,10 +152,14 @@ export default {
             });
         }
     },
+<<<<<<< HEAD
+
     async moreDetail(req,res){
         try{
             const id = req.params.id;
+            console.log("id:", id);
             const data = await car.findById({_id: id});
+            console.log("selected car :", data);
             res.render("cardetail.ejs", {data: data});
         }
         catch(error){
@@ -181,7 +202,6 @@ export default {
                 dropoffDate: req.body.dropoffDate,
                 carId: req.body.carId,
                 
-                
             });
             res.redirect("/");
 
@@ -196,12 +216,7 @@ export default {
         
         }
     },
-    async search(req,res){
-        
-        let {search} = req.body;
-        
-        let data = await car.find({name: {$regex: req.body.search, $options: "i"}});
-        res.render("homePage.ejs", {data: data, selectedFilter: ''});
-    }
+=======
+>>>>>>> e5d9f9a (i added a new order controller file to you)
     
 };
