@@ -12,18 +12,38 @@ export default {
         try{
            let data = await car.find({}).populate('orderId').sort({createdAt: 'desc'}).lean();
 
-            return res.render("homePage.ejs", {data: data});
+            let {filter} = req.query;
+            if(Array.isArray(filter)){
+                 console.log("fitler is:", filter);
+          
+                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}});
+                return res.render("homePage.ejs", {data: data});
+            
+            }
+            if(typeof filter === 'string'){
+                console.log("filter is:", filter);
+                data = await car.find({type: filter});
+                return res.render("homepage.ejs", {data: data, selectedFilter: filter});
 
+            }
+
+           
+            
+            data = await car.find({});
+            return res.render("homePage.ejs", {data: data, selectedFilter: ''});
+            
+            
+            
         }
         catch(error){
-             console.log("Error caught in addCar catch block:");
+             console.log("Error caught in getHomepage catch block:");
             return res.status(500).json({
                 success: false,
-                message: "Page Not_Found.",
+                message: "failed to render gethomepage.",
                 error: error.message
             });
         }
-        
+
     },
 
     async moreDetail(req,res){
