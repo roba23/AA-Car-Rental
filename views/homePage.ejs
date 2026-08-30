@@ -11,6 +11,39 @@
         <%-include("partial/header.ejs") %>
         <div class="container">
             <div class="sidebar">
+                     <div class="filter">
+                    <h2>Fiter By</h2>
+                    <h3>Type</h3>
+                    <div class="entrys">
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=suv'}})(this)"
+                        <%= selectedFilter === 'suv' ? 'checked' : '' %>>suv
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=hatchback'}})(this)"
+                        <%= selectedFilter === 'hatchback' ? 'checked' : '' %>>hatchback
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=sedan'}})(this)"
+                        <%= selectedFilter === 'sedan' ? 'checked' : '' %>>sedan
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=pickup'}})(this)"
+                        <%= selectedFilter === 'pickup' ? 'checked' : '' %>>Pickup
+                    </div>
+                    <h3>Price</h3>
+                    <div class="entrys">
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=100&filter=1000'}})(this)">$100 - $1,000
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=1000&filter=10000'}})(this)">$1,000 - $10,000
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=10000&filter=50000'}})(this)">$10,000 - $50,000
+                    </div>
+                    <div class="entrys">
+                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=50000&filter=100000'}})(this)">$50,000 - $100,000
+                    </div>
+                </div>
 
             </div>
             <div class="mainBody">
