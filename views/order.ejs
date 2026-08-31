@@ -4,6 +4,7 @@
         <title>Admin</title>
         <link rel="stylesheet" href="/styles/main.css">
         <link rel="stylesheet" href="/styles/form.css">
+        <link rel="stylesheet" href="/styles/order.css">
     </head>
     <body>
         <%-include("partial/header.ejs") %>
@@ -11,25 +12,21 @@
        <%-include ("partial/sidebar.ejs") %>
         <div class="mainBody">
             <% orders.forEach(order=> {  %>
-        <div>
+        <div class="order_card">
             <% if(order.carId) {  %>
-            <span>Car 👉:
-                <img style="max-width: 150px;" src="<%= order.carId.imgUrl %>" alt="">
-            </span>
-            <p>Type 👉: <%= order.carId.name %></p>
-            <p> Model 👉: <%= order.carId.model %></p>
-        <%   } else { %>
+            <img style="max-width: 150px;" src="<%= order.carId.imgUrl %>" alt="">
+            <h2><%= order.carId.name %></h2>
+            <p> Model: <%= order.carId.model %></p>
+            <%   } else { %>
             <p>Car information missing or deleted</p>
-        <%   }  %>
-
-        </div>
-        <div>
-            <p> Renter Full Name 👉: <%=order.fullname %> </p>
-            <p> Renter Phone 👉: <%= order.phone%> </p>
-            <p>Pick Up Date 👉:  <%= order.pickUp ? new Date(order.pickUp).toDateString() : 'N/A' %> </p>
-            <p> Drop Off Date 👉: <%= order.dropOff ? new Date(order.dropOff).toDateString() : 'N/A' %> </p>
-            <span> Bank Receipt 👉: 
-                <img src=" <%= order.receipt %> " alt="" style="max-width: 200px;">
+            <%   }  %>
+            <div>
+            <p> Renter Name : <%=order.fullname %> </p>
+            <p> Renter Phone : <%= order.phone%> </p>
+            <p>Pick Up Date :  <%= order.pickUp ? new Date(order.pickUp).toDateString() : 'N/A' %> </p>
+            <p> Drop Off Date : <%= order.dropOff ? new Date(order.dropOff).toDateString() : 'N/A' %> </p>
+            <span> Bank Receipt:
+            <a href="<%=order.receipt %>">Receipt</a>
             </span>
 
             <form action="/order/<%=order._id%>?_method=PUT" method="POST">
@@ -42,7 +39,9 @@
                 <% } %>
             </form>
             
+            </div>
         </div>
+        
         <hr>
   <%  }) %>
         </div>

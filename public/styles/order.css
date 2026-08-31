@@ -1,0 +1,16 @@
+.order_card{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(202, 193, 193);
+    padding: 20px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 20px;
+}
+.order_card img{
+    width: 300px;
+}
+.order_card form{
+    padding: 10px 5px;
+    width: fit-content;
+}
