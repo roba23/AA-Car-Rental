@@ -21,12 +21,9 @@
       <span class="eyebrow">New account</span>
       <h1>Create account</h1>
       <p>It takes less than a minute.</p>
-      <form action="/user/register" method="post" enctype="multipart/form-data">
+      <form action="/user/register" method="post">
         <div class="form-field"><label for="fullname">Full name</label><input id="fullname" required type="text" name="fullname" autocomplete="name"></div>
-        <div class="form-grid"><div class="form-field"><label for="age">Age</label><input id="age" required type="number" min="18" name="age"></div><div class="form-field"><label for="birthDate">Birth date</label><input id="birthDate" required type="date" name="birthDate"></div></div>
         <div class="form-field"><label for="email">Email</label><input id="email" required type="email" name="email" placeholder="you@example.com" autocomplete="email"></div>
-        <div class="form-field"><label for="phone">Phone</label><input id="phone" required type="tel" name="phone" autocomplete="tel"></div>
-        <div class="form-field"><label for="profile_pic">Profile photo <span style="color:#6b7280;font-weight:400">(optional)</span></label><input id="profile_pic" type="file" name="profile_pic" accept="image/*"></div>
         <div class="form-field"><label for="password">Password</label><input id="password" required type="password" name="password" autocomplete="new-password"></div>
         <button type="submit">Create account</button>
         <p style="text-align:center;color:#6b7280;margin:3px 0 0">Already a member? <a href="/user/login" style="font-weight:700">Log in</a></p>

@@ -40,30 +40,7 @@ export default  {
     },
     async postRegister(req,res){
         try{
-           
-           if (!req.file) {
-                        return res.status(400).send('No file uploaded.');
-                    }
-                    
-                    // 1. Compress the image buffer
-                    const resizedBuffer = await sharp(req.file.buffer)
-                        .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
-                        .jpeg({ quality: 80 }) 
-                        .toBuffer();
-                    
-                    // 2. Upload the compressed buffer directly to Cloudinary
-                    const result =  await  new Promise((resolve, reject) => {
-                        let stream =  cloudinary.uploader.upload_stream(
-                            { folder: 'car_images' },
-                            (error, result) => {
-                                // FIX: Added 'return' keywords back to guarantee Promise completion
-                                if (result)  resolve(result);
-                                else  reject(error);
-                            }
-                        );
-                        streamifier.createReadStream(resizedBuffer).pipe(stream);
-        
-                    });
+                      
         let role; 
         const checkDb = await user.find({});
         if(checkDb.length === 0){
@@ -80,13 +57,8 @@ export default  {
         
         const newUser = await user.create({
             fullname: fullname,
-            age: age,
-            imgUrl: result.secure_url,
-            cloudinaryId: result.public_id,
             role: role,
-            phone: phone,
             email: email,
-            birthDate: birthDate,
             password: hashed
         });
         

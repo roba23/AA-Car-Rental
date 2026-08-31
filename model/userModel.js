@@ -3,15 +3,12 @@ import dbConnection from "../config/config.js";
 import cloudinary from "../middleware/cloudinary.js";
 
 const userSchema = new mongoose.Schema({
+
     fullname:{
         type: String,
         required: true
     },
     email:{
-        type: String,
-        required: true
-    },
-    phone:{
         type: String,
         required: true
     },
@@ -24,9 +21,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
-
-
+    
 });
 
 const user = dbConnection.model('users', userSchema);
