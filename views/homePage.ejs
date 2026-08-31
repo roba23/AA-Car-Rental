@@ -28,15 +28,41 @@
         <h3>Filter cars</h3>
         <form method="get" action="/">
           <div class="filter-group">
-            <h4>Car type</h4><label class="filter-option"><input type="radio" name="filter" value="" <%= !locals.selectedFilter ? 'checked' : '' %> onchange="this.form.submit()">All cars</label><label class="filter-option"><input type="radio" name="filter" value="suv" <%= selectedFilter === 'suv' ? 'checked' : '' %> onchange="this.form.submit()">SUV</label><label class="filter-option"><input type="radio" name="filter" value="sedan" <%= selectedFilter === 'sedan' ? 'checked' : '' %> onchange="this.form.submit()">Sedan</label><label class="filter-option"><input type="radio" name="filter" value="hatchback" <%= selectedFilter === 'hatchback' ? 'checked' : '' %> onchange="this.form.submit()">Hatchback</label><label class="filter-option"><input type="radio" name="filter" value="pickup" <%= selectedFilter === 'pickup' ? 'checked' : '' %> onchange="this.form.submit()">Pickup</label>
+            <h4>Car type</h4>
+            <label class="filter-option">
+               <input type="radio" name="filter" value="" <%= !locals.selectedFilter ? 'checked' : '' %> onChange="this.form.submit()">All cars
+            </label>
+            <label class="filter-option">
+              <input type="radio" name="filter" value="suv" <%= selectedFilter === 'suv' ? 'checked' : '' %> onChange="this.form.submit()">SUV
+            </label>
+            <label class="filter-option">
+              <input type="radio" name="filter" value="sedan" <%= selectedFilter === 'sedan' ? 'checked' : '' %> onChange="this.form.submit()">Sedan
+            </label>
+            <label class="filter-option">
+              <input type="radio" name="filter" value="hatchback" <%= selectedFilter === 'hatchback' ? 'checked' : '' %> onChange="this.form.submit()">Hatchback
+            </label>
+            <label class="filter-option">
+              <input type="radio" name="filter" value="pickup" <%= selectedFilter === 'pickup' ? 'checked' : '' %> onChange="this.form.submit()">Pickup
+            </label>
           </div>
           <div class="filter-group">
-            <h4>Monthly price</h4><label class="filter-option"><input type="radio" name="price" value="0-1000" onchange="this.form.submit()">Under $1,000</label><label class="filter-option"><input type="radio" name="price" value="1000-10000" onchange="this.form.submit()">$1,000 – $10,000</label><label class="filter-option"><input type="radio" name="price" value="10000-50000" onchange="this.form.submit()">$10,000 – $50,000</label>
+            <h4>Monthly price</h4>
+            <label class="filter-option">
+              <input type="radio" name="price" value="0-1000" onChange="this.form.submit()">Under $1,000
+            </label><label class="filter-option">
+              <input type="radio" name="price" value="1000-10000" onChange="this.form.submit()">$1,000 – $10,000
+            </label>
+            <label class="filter-option">
+              <input type="radio" name="price" value="10000-50000" onChange="this.form.submit()">$10,000 – $50,000
+            </label>
           </div>
         </form>
       </aside>
       <section class="cards-grid">
-        <% if (locals.data && data.length) { data.forEach(car => { %><article class="car-card" role="link" tabindex="0" onclick="window.location.href='/moreDetail/<%= car._id %>'" onkeydown="if(event.key==='Enter')this.click()"><img src="<%= car.imgUrl %>" alt="<%= car.name %>">
+        <% if (locals.data && data.length) {  %>
+          <%  data.forEach(car => { %>
+          <article class="car-card" role="link" tabindex="0" onclick="window.location.href='/moreDetail/<%= car._id %>'" onkeydown="if(event.key==='Enter')this.click()">
+              <img src="<%= car.imgUrl %>" alt="<%= car.name %>">
           <div class="card-content">
             <span class="status <%= car.status ? '' : 'out' %>">
               <%= car.status ? 'Available now' : 'Currently out' %></span>
