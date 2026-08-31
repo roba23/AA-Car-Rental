@@ -5,9 +5,13 @@ import passport from "passport";
 import session from "express-session";
 import {MongoStore} from "connect-mongo";
 import configurePassport from "./config/passportConfig.js";
+import methodOverride from "method-override"
+
+import 'dotenv/config'
 
 const app = express();
 const PORT = 3000;
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
@@ -33,9 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 configurePassport(passport);
 
-app.use('',router);
-
-import 'dotenv/config'
 
 app.set( 'view engine' , 'ejs' )
 app.set( 'views', 'views')
@@ -43,9 +44,9 @@ app.use( express.static('public'))
 app.use( express.urlencoded({extended:true}) )
 app.use( express.json() )
 
+app.use(methodOverride("_method"))
 
-
-
+app.use('',router);
 
 
 

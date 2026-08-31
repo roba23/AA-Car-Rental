@@ -10,9 +10,22 @@ export default {
     async getOrderMessage (req,res){
         try{
          //   const targetOrder = req.params.id
-            const order = await orderDb.find().populate('carId').sort({createdAt: "desc"}).lean();
+            const order = await orderDb.find({status: false, Reject: false}).populate('carId').sort({createdAt: "desc"}).lean();
             
             return res.render('order', {orders: order})  // orders.carId.Model
+            
+        } catch(err){
+            console.log(err)
+        }
+    },
+
+    
+    async getOrderHistory (req,res){
+        try{
+
+            const history = await orderDb.find( { $or:[ {status: true} , {Reject: true} ] }).populate('carId').sort({createdAt: "desc"}).lean();
+            
+            return res.render('orderHistory', {History: history})  // orders.carId.Model
             
         } catch(err){
             console.log(err)
@@ -59,7 +72,7 @@ export default {
             });
             console.log("the created order is:", data);
            
-            res.redirect("/");
+            res.redirect("/orders");
 
         }
         catch(error){
@@ -91,7 +104,33 @@ export default {
                 { $set:
                     {status:false}
                 });
-            return res.redirect('/orders')
+            return res.redirect('/')
+
+        }catch(err){
+            console.error(err)
+
+        }
+    },
+
+    async markAsAvailable(req,res) {
+        try{
+            const orderId = req.params.id
+            const theOrder = await orderDb.findOneAndUpdate( 
+                {_id: orderId},
+                { $set:
+                    { Reject: true }
+                },
+                {
+                    sort:{_id: -1},
+                    upsert: false
+                } );
+            console.log("the car id i found is:", theOrder.carId);
+        
+            await car.findByIdAndUpdate( theOrder.carId,
+                { $set:
+                    {Reject:false}
+                });
+            return res.redirect('/')
 
         }catch(err){
             console.error(err)

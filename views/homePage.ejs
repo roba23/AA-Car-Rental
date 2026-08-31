@@ -1,80 +1,58 @@
-<!DOCTYPE html>
-<meta lang="en">
-<html>
-    <head>
-        <title>Home Page</title>
-        <link  rel="stylesheet" href="/styles/main.css">
-        <link rel="stylesheet" href="/styles/card.css">
-       
-    </head>
-    <body>
-        <%-include('partial/header.ejs') %>
-        <div class="container">
-            <div class="sidebar">
-                     <div class="filter">
-                    <h2>Fiter By</h2>
-                    <h3>Type</h3>
-                    <div class="entrys">
-                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=suv'}})(this)"
-                        <%= selectedFilter === 'suv' ? 'checked' : '' %>>suv
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox" name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=hatchback'}})(this)"
-                        <%= selectedFilter === 'hatchback' ? 'checked' : '' %>>hatchback
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=sedan'}})(this)"
-                        <%= selectedFilter === 'sedan' ? 'checked' : '' %>>sedan
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox"  name="filterType" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=pickup'}})(this)"
-                        <%= selectedFilter === 'pickup' ? 'checked' : '' %>>Pickup
-                    </div>
-                    <h3>Price</h3>
-                    <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=100&filter=1000'}})(this)">$100 - $1,000
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=1000&filter=10000'}})(this)">$1,000 - $10,000
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=10000&filter=50000'}})(this)">$10,000 - $50,000
-                    </div>
-                    <div class="entrys">
-                        <input type="checkbox" onchange="((e)=>{if(e.checked){ window.location.href='/?filter=50000&filter=100000'}})(this)">$50,000 - $100,000
-                    </div>
-                </div>
+<!doctype html>
+<html lang="en">
 
-            </div>
-            <div class="mainBody">
-                <%# This is bereket pull request %>
-                <% if(locals.data){ %>
-                 <% data.forEach(data => { %>
-                    
-                <div class="card" onClick = "window.location.href='/moreDetail/<%=data._id %>'">
-                    <small style="position: relative; top: 0; right: 1%; background-color: <%= (data.status ) ? 'green' : 'red' %>; color: white;">
-                        <%= ( data.status ) ? "Available" : "Out" %> 
-                    </small>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>RoadReady | Find your ride</title>
+</head>
 
-                    <h4><%=data.name %></h4>
-                    <div class="box-1">
-                        <p ><%=data.type%></p>
-                        <p class="price">$<%=data.priceMonthly%>/month</p>
-                    </div>
-                    <img src=<%= data.imgUrl %> alt="car Image">
-                    <div class="info">
-                        <div class="item">
-
-                        </div>
-                    </div>"
-                    
-                        <p><%=data.description %></p>
-                   
-                </div>
-                <% })} %>
-            </div>
-
-        </div>
+<body>
+  <%- include('partial/header.ejs') %>
+  <section class="hero">
+    <div class="hero-copy"><span class="eyebrow" style="color:#ffb199">Your trip, your pace</span>
+      <h1>Drive the road your way.</h1>
+      <p>Book a reliable car in minutes. From city runabouts to roomy family SUVs, there is a RoadReady ride for every plan.</p><a class="button" href="#fleet">Browse available cars</a>
+    </div>
+    <div class="orbit"></div><img class="hero-car" src="/images/hero-car.jpg" alt="Modern rental car">
+  </section>
+  <main class="page" id="fleet">
+    <div class="section-head">
+      <div><span class="eyebrow">Available fleet</span>
+        <h2>Choose your next ride</h2>
+        <p>Click a vehicle to view details and reserve it.</p>
+      </div>
+    </div>
+    <div class="browse-layout">
+      <aside class="filter-panel">
+        <h3>Filter cars</h3>
+        <form method="get" action="/">
+          <div class="filter-group">
+            <h4>Car type</h4><label class="filter-option"><input type="radio" name="filter" value="" <%= !locals.selectedFilter ? 'checked' : '' %> onchange="this.form.submit()">All cars</label><label class="filter-option"><input type="radio" name="filter" value="suv" <%= selectedFilter === 'suv' ? 'checked' : '' %> onchange="this.form.submit()">SUV</label><label class="filter-option"><input type="radio" name="filter" value="sedan" <%= selectedFilter === 'sedan' ? 'checked' : '' %> onchange="this.form.submit()">Sedan</label><label class="filter-option"><input type="radio" name="filter" value="hatchback" <%= selectedFilter === 'hatchback' ? 'checked' : '' %> onchange="this.form.submit()">Hatchback</label><label class="filter-option"><input type="radio" name="filter" value="pickup" <%= selectedFilter === 'pickup' ? 'checked' : '' %> onchange="this.form.submit()">Pickup</label>
+          </div>
+          <div class="filter-group">
+            <h4>Monthly price</h4><label class="filter-option"><input type="radio" name="price" value="0-1000" onchange="this.form.submit()">Under $1,000</label><label class="filter-option"><input type="radio" name="price" value="1000-10000" onchange="this.form.submit()">$1,000 – $10,000</label><label class="filter-option"><input type="radio" name="price" value="10000-50000" onchange="this.form.submit()">$10,000 – $50,000</label>
+          </div>
+        </form>
+      </aside>
+      <section class="cards-grid">
+        <% if (locals.data && data.length) { data.forEach(car => { %><article class="car-card" role="link" tabindex="0" onclick="window.location.href='/moreDetail/<%= car._id %>'" onkeydown="if(event.key==='Enter')this.click()"><img src="<%= car.imgUrl %>" alt="<%= car.name %>">
+          <div class="card-content">
+            <span class="status <%= car.status ? '' : 'out' %>">
+              <%= car.status ? 'Available now' : 'Currently out' %></span>
+            <h3><%= car.name %></h3>
+            <div class="car-meta"><span><%= car.type %></span><span><%= car.capacity || '—' %> seats</span></div>
+            <div class="price-row"><strong>$<%= car.priceMonthly %> <small>/ month</small></strong><span>View details →</span></div>
+          </div>
+          </article><% }) } else { %><div class="empty">No cars match these filters. Try another selection.</div><% } %></section>
+    </div>
+  </main>
+  <section id="how-it-works" style="background:#fff;padding:55px max(5vw,28px);text-align:center"><span class="eyebrow">How it works</span>
+    <h2 style="margin:8px 0 12px">Book in three easy steps</h2>
+    <p style="color:#6b7280;margin:0">Choose a car, enter your trip details, and receive confirmation from our team.</p>
+  </section>
   
-    </body>
+  <%- include('partial/footer.ejs') %>
+</body>
+
 </html>

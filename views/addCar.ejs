@@ -1,97 +1,48 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Admin</title>
-        <link rel="stylesheet" href="/styles/main.css">
-        <link rel="stylesheet" href="/styles/form.css">
-    </head>
-    <body>
-        <%-include("partial/header.ejs") %>
-    <div class="container">
-        <%-include("partial/sidebar.ejs") %>
+<!doctype html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Add car | RoadReady</title>
+</head>
 
-        <div class="mainBody">
-            <form action="/addCar" method="post" enctype="multipart/form-data">
-            <div class="entrys">
-                <label for="name">Name </label>
-                <input type="text" name="name" placeholder="name"/>
-            </div>
-            <div class="entrys">
-                <label for="model">Model: </label>
-                <input type="text"  name="model" placeholder="model">
-            </div>
-            <div class="entrys">
-                 <label for="type">Type</label>
-                <input type="radio" name="type" value="sedan">sedan
-                <input type="radio" name="type" value="suv">suv
-                <input type ="radio" name="type" value="minivan">minivan
-            </div>
-            <div class="entrys">
-                <label>Descriptoin</label>
-                <input type="text" name="description" placeholder="enter cars description">
-            </div>
-            
-            <div class="entrys">
-                <input type="file" name="file" accept="image/*">
-            </div>
-            <div class="entrys">
-                <label>Fuel type</label>
-                <input type="radio" name="fuelType" value="Diesel" required>Diesel
-                <input type="radio" name="fuelType" value="Electric">Electric
-                
-            </div> 
-            <div class="entrys">
-                <label>Capacity</label>
-                <input type= "number" name="capacity" placeholder="capacity">
-            </div>
-            <div class="entrys">
-                 <label for="shitfing">Shifting </label>
-                <input type="radio" name="shifting" value="automatic">
-                <input type="radio" name="shifting" value="manual">Manual
-            </div>
-           
-            <div class="entrys">
-                <input type="text" name="priceYearly" placeholder="yearly renting price">
-            </div>
+<body><%- include('partial/header.ejs') %><main class="admin-layout"><%- include('partial/sidebar.ejs') %><section class="form-card"><span class="eyebrow">Fleet management</span>
+      <h1>Add a vehicle</h1>
+      <p>Create a polished listing for a new rental car.</p>
+      <form action="/addCar" method="post" enctype="multipart/form-data" class="form-grid">
+        <div class="form-field"><label>Car name</label><input required type="text" name="name" placeholder="e.g. Toyota RAV4"></div>
+        <div class="form-field"><label>Model</label><input required type="text" name="model" placeholder="e.g. 2024"></div>
+        <div class="form-field"><label>Type</label><select name="type" required>
+            <option value="">Choose type</option>
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV</option>
+            <option value="hatchback">Hatchback</option>
+            <option value="pickup">Pickup</option>
+            <option value="minivan">Minivan</option>
+          </select></div>
+        <div class="form-field"><label>Fuel type</label><select name="fuelType" required>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Hybrid">Hybrid</option>
+          </select></div>
+        <div class="form-field"><label>Capacity</label><input required type="number" min="1" name="capacity" placeholder="Seats"></div>
+        <div class="form-field"><label>Transmission</label><select name="shifting">
+            <option value="automatic">Automatic</option>
+            <option value="manual">Manual</option>
+          </select></div>
+        <div class="form-field"><label>Monthly price</label><input required type="number" min="0" name="priceMonthly" placeholder="USD"></div>
+        <div class="form-field"><label>Yearly price</label><input type="number" min="0" name="priceYearly" placeholder="USD"></div>
+        <div class="form-field"><label>Mileage</label><input type="number" min="0" name="milage" placeholder="km"></div>
+        <div class="form-field"><label>Car photo</label><input required type="file" name="file" accept="image/*"></div>
+        <div class="form-field full"><label>Description</label><textarea name="description" rows="4" placeholder="Describe the car, condition, and what makes it a great rental."></textarea></div>
+        <div class="form-field full"><label>Features</label>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:5px"><label class="filter-option"><input type="checkbox" value="Seat warmer" name="feature">Seat warmer</label><label class="filter-option"><input type="checkbox" value="AC" name="feature">A/C</label><label class="filter-option"><input type="checkbox" value="Assisted parking" name="feature">Assisted parking</label><label class="filter-option"><input type="checkbox" value="Adaptive cruise control" name="feature">Cruise control</label></div>
+        </div>
+        <div class="form-field full"><button type="submit">Add vehicle</button></div>
+      </form>
+    </section>
+  </main><%- include('partial/footer.ejs') %></body>
 
-            <div class="entrys">
-                <input type="text" name="priceMonthly" placeholder="monthly renting price">
-            </div>
-
-            <div class="entrys">
-                <input type="number" name="milage" placeholder="milage">
-            </div>
-            
-            <div class="entrys">
-                <label for="seat_warmer">Sit Warmer</label>
-            <input type="checkbox" id="sit" value="Sit warmer" name="feature">
-
-            <label for="ac">Ac</label>
-            <input type="checkbox" id="ac" value="Ac" name="feature">
-
-            <label for="door">Assisted Parking</label>
-            <input type="checkbox" id="door" value="Assisted Parking" name="feature">
-
-            <label for="door">Adapative Cruise Control</label>
-            <input type="checkbox" id="door" value="Adapative Cruise Control" name="feature">
-
-            <label for="door">Automatic Braking Ssytem</label>
-            <input type="checkbox" id="door" value="Automatic Breaking System" name="feature">
-
-            <label for="door">Push Button Start & Keyless Entry</label>
-            <input type="checkbox" id="door" value="Push Button Start & Keyless Entry" name="feature">
-            </div>
-            <button type="submit">Submit</button>
-
-            </form>
-
- </div>
- 
-       
-        
-    </div>
-            
-       
-    </body>
 </html>

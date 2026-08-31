@@ -1,46 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <% if(locals.data){ %>
-            <div class="details">
-                <p><%=data.name%></p>
-                <p><%=data.type%></p>
-                <p>Model: <%= data.model %></p>
-                <p>Type: <%= data.type %></p>
-                <p>description: <%=data.description%></p>
-                <p>capacity: <%=data.capacity%></p>
-                
-                <img src="<%=data.imgUrl %>">
-                <p>feautures: <%=data.feautures%></p>
-                <p>fuelType: <%=data.fuelType %></p>
-                <p>price yearly <%= data.priceYearly %></p>
-                <p>priceMontly <%= data.priceMonthly %></p>
-                <p>milage: <%= data.milage %></p>
-                <p></p>
-               
-            </div>
-            <% } %>
+<!doctype html>
+<html lang="en">
 
-            <div>
-                <form action="/orderCar" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="carId" value="<%=data._id%>">
-                    <input type="text" name="name" placeholder="fullname">
-                    <input type="tel" name="phone" placeholder="eg.+251-xxx">
-                    <input type="file" name="receipt" accept="image/*">
-                    <input type="date" name="pickUp">
-                    <input type="date" name="dropOff">
-                    <button type="submit">Order</button>
-                </form>
-            </div>
-            
- 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Car details | RoadReady</title>
+</head>
 
-            <a href="/orders">
-                <button class="getOrder"> Orders </button>
-            </a>
-    </body>
+<body><%- include('partial/header.ejs') %><main class="page"><% if (locals.data) { %><div class="detail-grid"><img class="detail-photo" src="<%= data.imgUrl %>" alt="<%= data.name %>">
+      <div>
+        <section class="detail-panel"><span class="status <%= data.status ? '' : 'out' %>"><%= data.status ? 'Available to book' : 'Currently unavailable' %></span>
+          <h1><%= data.name %></h1>
+          <p><%= data.description %></p>
+          <div class="specs">
+            <div class="spec"><small>Model</small><strong><%= data.model %></strong></div>
+            <div class="spec"><small>Type</small><strong><%= data.type %></strong></div>
+            <div class="spec"><small>Passengers</small><strong><%= data.capacity %> seats</strong></div>
+            <div class="spec"><small>Fuel</small><strong><%= data.fuelType %></strong></div>
+            <div class="spec"><small>Transmission</small><strong><%= data.shifting || '-' %></strong></div>
+            <div class="spec"><small>Mileage</small><strong><%= data.milage || '-' %></strong></div>
+          </div>
+          <div class="price-row"><strong>$<%= data.priceMonthly %> <small>/ month</small></strong><span>$<%= data.priceYearly %> yearly</span></div>
+        </section><% if (data.status) { %><section class="booking-card">
+          <h3>Reserve this car</h3>
+          <form action="/orderCar" method="post" enctype="multipart/form-data" class="form-grid"><input type="hidden" name="carId" value="<%= data._id %>">
+            <div class="form-field"><label>Full name</label><input required type="text" name="name" placeholder="Your full name"></div>
+            <div class="form-field"><label>Phone</label><input required type="tel" name="phone" placeholder="+251 xxx xxx xxx"></div>
+            <div class="form-field"><label>Pick-up</label><input required type="date" name="pickUp"></div>
+            <div class="form-field"><label>Drop-off</label><input required type="date" name="dropOff"></div>
+            <div class="form-field full"><label>Payment receipt</label><input required type="file" name="receipt" accept="image/*"></div>
+            <div class="form-field full"><button type="submit">Request booking</button></div>
+          </form>
+        </section><% } %>
+      </div>
+    </div><% } else { %><div class="empty">We couldn’t find that car.</div><% } %></main><%- include('partial/footer.ejs') %></body>
 
 </html>

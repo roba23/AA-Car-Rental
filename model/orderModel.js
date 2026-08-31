@@ -35,6 +35,10 @@ const orderSchema = new mongoose.Schema({
     status: {
         type: Boolean,
         default: false
+    },    
+    Reject: {
+        type: Boolean,
+        default: false
     },
     createdAt: {
         type: Date,

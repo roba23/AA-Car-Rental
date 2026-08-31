@@ -1,55 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Admin</title>
-        <link rel="stylesheet" href="/styles/main.css">
-        <link rel="stylesheet" href="/styles/form.css">
-    </head>
-    <body>
-        <%-include("partial/header.ejs") %>
-    <div class="container">
-       <%-include ("partial/sidebar.ejs") %>
-        <div class="mainBody">
-            <% orders.forEach(order=> {  %>
-        <div>
-            <% if(order.carId) {  %>
-            <span>Car 👉:
-                <img style="max-width: 150px;" src="<%= order.carId.imgUrl %>" alt="">
-            </span>
-            <p>Type 👉: <%= order.carId.name %></p>
-            <p> Model 👉: <%= order.carId.model %></p>
-        <%   } else { %>
-            <p>Car information missing or deleted</p>
-        <%   }  %>
+<!doctype html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Orders | RoadReady Admin</title>
+</head>
+
+<body><%- include('partial/header.ejs') %><main class="admin-layout"><%- include('partial/sidebar.ejs') %><section>
+      <div class="section-head">
+        <div><span class="eyebrow">Admin console</span>
+          <h2>Booking requests</h2>
+          <p>Review, approve, or decline incoming rental requests.</p>
         </div>
-        <div>
-            <p> Renter Full Name 👉: <%=order.fullname %> </p>
-            <p> Renter Phone 👉: <%= order.phone%> </p>
-            <p>Pick Up Date 👉:  <%= order.pickUp ? new Date(order.pickUp).toDateString() : 'N/A' %> </p>
-            <p> Drop Off Date 👉: <%= order.dropOff ? new Date(order.dropOff).toDateString() : 'N/A' %> </p>
-            <span> Bank Receipt 👉: 
-                <img src=" <%= order.receipt %> " alt="" style="max-width: 200px;">
-            </span>
+      </div>
+      <div class="order-list"><% if (orders && orders.length) { orders.forEach(order => { %><article class="order-card"><% if (order.carId) { %><img src="<%= order.carId.imgUrl %>" alt="<%= order.carId.name %>">
+          <div>
+            <h3><%= order.carId.name %> <span style="font:400 .8rem DM Sans;color:#6b7280">· <%= order.carId.model %></span></h3>
+            <div class="order-meta"><span><strong>Renter:</strong> <%= order.fullname %></span><span><strong>Phone:</strong> <%= order.phone %></span><span><strong>Pick up:</strong> <%= order.pickUp ? new Date(order.pickUp).toDateString() : 'N/A' %></span><span><strong>Return:</strong> <%= order.dropOff ? new Date(order.dropOff).toDateString() : 'N/A' %></span></div><% if (order.receipt) { %><a href="<%= order.receipt %>" target="_blank" style="display:inline-block;margin-top:10px;color:#e85320;font-size:.82rem;font-weight:700">View payment receipt ↗</a><% } %>
+          </div>
+          <div><% if (!order.status && !order.Reject) { %><div class="actions">
+              <form action="/order/<%= order._id %>?_method=PUT" method="POST"><button class="approve" type="submit">Approve</button></form>
+              <form action="/decline/<%= order._id %>?_method=PUT" method="POST"><button class="reject" type="submit">Decline</button></form>
+            </div><% } else if (order.status) { %><span class="approved">✓ Approved</span><% } else { %><span class="declined">× Declined</span><% } %></div><% } else { %><div>
+            <h3>Car unavailable</h3>
+            <p style="color:#6b7280">The associated vehicle was removed.</p>
+          </div><% } %>
+        </article><% }) } else { %><div class="empty">There are no booking requests yet.</div><% } %></div>
+    </section>
+  </main><%- include('partial/footer.ejs') %></body>
 
-            <form action="/order/<%=order._id%>?_method=PUT" method="POST">
-                <% if(!order.status){ %>
-                    <button style="background-color: green; color: white;padding: 3px 2%;" type="submit">Accept</button>
-                <% } else{ %>
-                    <p style="color: yellowgreen;"> 
-                        <i style="color: green;" class="fa-solid fa-check-double"></i>
-                        Approved </p>
-                <% } %>
-            </form>
-            
-        </div>
-        <hr>
-  <%  }) %>
-        </div>
-    
-    </div>
-   
-
-
-</body>
 </html>
