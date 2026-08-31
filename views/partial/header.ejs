@@ -409,7 +409,8 @@
     border: 2px dashed #ffffff38;
     border-radius: 50%;
     animation: spin 18s linear infinite;
-    z-index: -1
+    z-index: -1;
+    padding-top: 100px;
   }
 
   @keyframes spin {
@@ -719,5 +720,12 @@
     
   </nav>
 
-  <div class="header-actions"><a class="login" href="/user/login">Log in</a><a class="button" href="/user/register">Get started</a></div>
+  <div class="header-actions">
+    <% if(locals.role){ %>
+      <a class="login" href="/user/logout">Log Out</a>
+    <% } else{%>
+    <a class="login" href="/user/login">Log in</a>
+    <% } %>
+    <a class="button" href="/user/register">Get started</a>
+  </div>
 </header>

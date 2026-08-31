@@ -7,6 +7,12 @@ import bcrypt from "bcrypt";
 import passport from "passport";
 
 export default  {
+    async logOUt(req,res){
+        req.session.destroy();
+        res.clearCookie('car_rental');
+        res.redirect("/");
+
+    },
     async getLogin(req,res){
         if(req.query.error){
             return res.render("login.ejs", {error: req.query.error});
