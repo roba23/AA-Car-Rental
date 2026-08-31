@@ -25,22 +25,22 @@ export default {
             let {filter} = req.query;
             if(Array.isArray(filter)){
           
-                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}});
+                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).sort({createdAt: "desc"}).lean();
                 return res.render("homePage.ejs", {data: data, role: role});
-            
+             
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
-                data = await car.find({type: filter}).populate('orderId').lean();
+                data = await (await car.find({type: filter}).populate('orderId')).sort({createdAt: "desc"}).lean();
                 return res.render("homepage.ejs", {data: data, selectedFilter: filter, role: role});
 
             }
 
            
             
-            data = await car.find({});
+            data = await car.find({}).sort({createdAt: "desc"}).lean();;
             
-            return res.render("homePage.ejs", {data: data, selectedFilter: '', role: role});
+            return res.render("homePage.ejs", {data: data, selectedFilter: '', role: role})
            
            
             
@@ -62,7 +62,7 @@ export default {
             const id = req.params.id;
             console.log("id:", id);
 
-            const data = await car.findById({_id: id});
+            const data = await car.findById({_id: id}).populate('orderId').lean();
             console.log("selected car :", data);
 
             res.render("carDetail.ejs", {data: data});
@@ -129,7 +129,7 @@ export default {
                 capacity: req.body.capacity,
                 shifting: req.body.shifting,
                 priceMonthly: req.body.priceMonthly,
-                priceYearly: req.body.priceYearly,
+                //priceYearly: req.body.priceYearly,
                 milage: req.body.milage,
                 features: featuresArray,
             });

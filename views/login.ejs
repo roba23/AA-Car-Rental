@@ -1,39 +1,34 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="/styles/login.css">
-
-    </head>
-    <body>
-     <div class="container">
-        <div class="greeter">
-            <p>Welcome to rent-a-car we have a wide selection of cars
-                to choose from simply login and order a car
-            </p>
-
-        </div>
-        <div class="form_container">
-            <form method="post" action="/user/login">
-            <h2>Login</h2>
-            <label for="email">Email</label>
-            <input type="text" name="email" placeholder="email">
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="password">
-            <button type="submit">Login</button>
-            <% if(locals.error){ %>
-            <p style="color:red;">Error: <%=error %></p>
-            <% } %>
-            Don't have an account <a href="/user/register">Register</a>
-        
-
-
-        </form>
-
-        
-        </div>
-        
-      </div>
-       
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in | RoadReady</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
+    :root{--brand:#ff6b35;--ink:#111827;--muted:#6b7280;--line:#e6e8ef}*{box-sizing:border-box}body{margin:0;font-family:'DM Sans',sans-serif;color:var(--ink)}.auth-page{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr}.auth-intro{background:radial-gradient(circle at 100% 100%,#ff6b3548,transparent 38%),linear-gradient(145deg,#101b42,#293e85);color:#fff;padding:clamp(42px,8vw,110px);display:flex;flex-direction:column;justify-content:center}.brand{font:800 1.25rem Manrope;color:#fff;text-decoration:none;letter-spacing:-.7px}.brand span,.eyebrow,a{color:var(--brand)}.eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.auth-intro h1,.form-card h1{font-family:Manrope;margin:12px 0}.auth-intro h1{font-size:clamp(2.35rem,4vw,3.65rem);line-height:1.08;letter-spacing:-.055em}.auth-intro p{max-width:410px;color:#c7d2fe;line-height:1.7}.auth-form{display:flex;align-items:center;justify-content:center;padding:38px;background:#f7f8fb}.form-card{width:min(100%,440px);background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 20px 50px #17255410}.form-card h1{font-size:1.85rem}.form-card>p{margin-top:0;color:var(--muted)}.form-card form{display:grid;gap:15px}.form-field label{font-size:.82rem;font-weight:700;display:block;margin-bottom:7px}input{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit;outline:none}input:focus{border-color:var(--brand);box-shadow:0 0 0 3px #ff6b3520}button{padding:13px 18px;border:0;border-radius:10px;background:var(--brand);color:#fff;font:600 .93rem 'DM Sans';cursor:pointer;transition:.2s}button:hover{background:#e85320;transform:translateY(-1px)}@media(max-width:800px){.auth-page{grid-template-columns:1fr}.auth-intro{padding:48px 30px}.auth-form{padding:30px 18px}}
+  </style>
+</head>
+<body class="auth-page">
+  <section class="auth-intro">
+    <a class="brand" href="/" style="margin-bottom:55px">Road<span>Ready</span></a>
+    <span class="eyebrow" style="color:#ffb199">Welcome back</span>
+    <h1>Every good trip starts with the right car.</h1>
+    <p>Log in to manage your bookings and find your next ride.</p>
+  </section>
+  <section class="auth-form">
+    <div class="form-card">
+      <span class="eyebrow">Account access</span>
+      <h1>Log in</h1>
+      <p>Enter your details to continue.</p>
+      <form method="post" action="/user/login">
+        <div class="form-field"><label for="email">Email</label><input id="email" required type="email" name="email" placeholder="you@example.com" autocomplete="email"></div>
+        <div class="form-field"><label for="password">Password</label><input id="password" required type="password" name="password" placeholder="Your password" autocomplete="current-password"></div>
+        <% if (locals.error) { %><p style="color:#d9485f;margin:0">Error: <%= error %></p><% } %>
+        <button type="submit">Log in</button>
+        <p style="text-align:center;color:#6b7280;margin:3px 0 0">New to RoadReady? <a href="/user/register" style="font-weight:700">Create an account</a></p>
+      </form>
+    </div>
+  </section>
+</body>
 </html>
