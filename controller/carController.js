@@ -31,7 +31,7 @@ export default {
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
-                data = await (await car.find({type: filter}).populate('orderId')).sort({createdAt: "desc"}).lean();
+                data = await car.find({type: filter}).populate('orderId').sort({createdAt: "desc"}).lean();
                 return res.render("homepage.ejs", {data: data, selectedFilter: filter, role: role});
 
             }
@@ -47,7 +47,7 @@ export default {
             
         }
         catch(error){
-             console.log("Error caught in getHomepage catch block:");
+             console.log("Error caught in getHomepage catch block:", error);
             return res.status(500).json({
                 success: false,
                 message: "failed to render gethomepage.",

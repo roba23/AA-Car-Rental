@@ -11,26 +11,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    age:{
-        type: String,
-        required: true
-    },
     phone:{
         type: String,
         required: true
-    },
-    birthDate:{
-        type: Date,
-        required: true
-    },
-    cloudinaryId:{
-        type: String,
-        required: true
-    },
-    imageUrl:{
-        type: String,
-        required: true,
-        default: "/images/avatar.png"
     },
     role:{
         type: String,
