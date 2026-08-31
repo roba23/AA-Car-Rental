@@ -7,7 +7,7 @@ import 'dotenv/config';
 
 
 const url = process.env.MONGO_URL;
-console.log("the url is:", url);
+
 const dbConnection = mongoose.createConnection(url, {
    
 });
