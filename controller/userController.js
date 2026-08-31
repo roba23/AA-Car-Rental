@@ -12,7 +12,7 @@ export default  {
             return res.render("login.ejs", {error: req.query.error});
         }
       
-        return res.render("login.ejs");
+        return res.render("login.ejs"); 
 
     },
     async postLogin(req,res,next){
@@ -64,7 +64,7 @@ export default  {
                         streamifier.createReadStream(resizedBuffer).pipe(stream);
         
                     });
-        let role;
+        let role; 
         const checkDb = await user.find({});
         if(checkDb.length === 0){
             role = "admin";
