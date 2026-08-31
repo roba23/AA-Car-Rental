@@ -15,11 +15,9 @@ export default {
         try{
            
             let data;
-            let role = 'user';
+            let role = null;
             if(req.user){
-                if(req.user.role === 'admin'){
-                    role = 'admin';
-                }
+                   role = req.user.role;
                
             }
             let {filter} = req.query;
@@ -47,7 +45,7 @@ export default {
             
         }
         catch(error){
-             console.log("Error caught in getHomepage catch block:");
+             console.log("Error caught in getHomepage catch block:", error);
             return res.status(500).json({
                 success: false,
                 message: "failed to render gethomepage.",

@@ -5,7 +5,7 @@ import passport from "passport";
 import session from "express-session";
 import {MongoStore} from "connect-mongo";
 import configurePassport from "./config/passportConfig.js";
-import methodOverride from "method-override"
+
 
 import 'dotenv/config'
 
@@ -44,7 +44,7 @@ app.use( express.static('public'))
 app.use( express.urlencoded({extended:true}) )
 app.use( express.json() )
 
-app.use(methodOverride("_method"))
+
 
 app.use('',router);
 
