@@ -31,7 +31,7 @@ export default {
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
-                data = await (await car.find({type: filter}).populate('orderId')).sort({createdAt: "desc"}).lean();
+                data = await car.find({type: filter}).populate('orderId').sort({createdAt: "desc"}).lean();
                 return res.render("homepage.ejs", {data: data, selectedFilter: filter, role: role});
 
             }

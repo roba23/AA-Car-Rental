@@ -3,6 +3,7 @@ import dbConnection from "../config/config.js";
 import cloudinary from "../middleware/cloudinary.js";
 
 const userSchema = new mongoose.Schema({
+
     fullname:{
         type: String,
         required: true
@@ -10,27 +11,6 @@ const userSchema = new mongoose.Schema({
     email:{
         type: String,
         required: true
-    },
-    age:{
-        type: String,
-        required: true
-    },
-    phone:{
-        type: String,
-        required: true
-    },
-    birthDate:{
-        type: Date,
-        required: true
-    },
-    cloudinaryId:{
-        type: String,
-        required: true
-    },
-    imageUrl:{
-        type: String,
-        required: true,
-        default: "/images/avatar.png"
     },
     role:{
         type: String,
@@ -41,9 +21,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
-
-
+    
 });
 
 const user = dbConnection.model('users', userSchema);
