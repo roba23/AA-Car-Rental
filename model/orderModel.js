@@ -1,41 +1,47 @@
 import mongoose from "mongoose";
 import dbConnection from "../config/config.js";
 
+
 const orderSchema = new mongoose.Schema({
-    fullname:{
-        type: String,
+    pickUp:{
+        type: Date,
+        required: true
+    },
+    dropOff:{
+        type: Date,
         required: true
     },
     receipt:{
         type: String,
-       required: true
-},
-    phone: {
+        required: true
+    },
+    cloudinaryId:{
         type: String,
         required: true
     },
-    pickupDate:{
-        type: Date,
+    fullname:{
+        type: String,
         required: true
     },
-    dropoffDate:{
-        type: Date,
+    phone:{
+        type: String,
         required: true
-    },
-    cloudinary_Id:{
-        type:String,
     },
     carId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "cars"
+        ref: "cars",
+        required: true
     },
-    rented:{
+    status: {
         type: Boolean,
-        required: true,
         default: false
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+})
 
-});
 
 const order = dbConnection.model('orders', orderSchema);
 

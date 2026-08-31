@@ -5,6 +5,9 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/Contact">Contact</a></li>
+                    <%if(locals.role && role === 'admin'){ %>
+                    <li><a href="/orders">DashBoard</a></li>
+                    <% } %>
                 </ul>
             </nav>
             <div class="searchBar">
@@ -13,4 +16,4 @@
                 <button type="submit">Search</button>
                 </form>
             </div>
-        </div>
+</div>

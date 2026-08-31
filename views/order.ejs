@@ -1,44 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" 
-    integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-
-    <header>
-        <nav style="display: flex; align-items: center;">
-            <a style="margin: 5% auto; text-align: center;" href="/"> Home </a>
-        </nav>
-    </header>
-   <% orders.forEach(order=> {  %>
+<html>
+    <head>
+        <title>Admin</title>
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/form.css">
+    </head>
+    <body>
+        <%-include("partial/header.ejs") %>
+    <div class="container">
+       <%-include ("partial/sidebar.ejs") %>
+        <div class="mainBody">
+            <% orders.forEach(order=> {  %>
         <div>
             <% if(order.carId) {  %>
             <span>Car 👉:
-                <img style="max-width: 150px;" src="<%= order.carId.imageUrl %>" alt="">
+                <img style="max-width: 150px;" src="<%= order.carId.imgUrl %>" alt="">
             </span>
-            <p>Type 👉: <%= order.carId.carName %></p>
-            <p> Model 👉: <%= order.carId.Model %></p>
+            <p>Type 👉: <%= order.carId.name %></p>
+            <p> Model 👉: <%= order.carId.model %></p>
         <%   } else { %>
             <p>Car information missing or deleted</p>
         <%   }  %>
 
         </div>
         <div>
-            <p> Renter Full Name 👉: <%=order.renterName %> </p>
-            <p> Renter Phone 👉: <%= order.Phone%> </p>
+            <p> Renter Full Name 👉: <%=order.fullname %> </p>
+            <p> Renter Phone 👉: <%= order.phone%> </p>
             <p>Pick Up Date 👉:  <%= order.pickUp ? new Date(order.pickUp).toDateString() : 'N/A' %> </p>
-            <p> Drop Off Date 👉: <%= order.dropOFF ? new Date(order.dropOFF).toDateString() : 'N/A' %> </p>
+            <p> Drop Off Date 👉: <%= order.dropOff ? new Date(order.dropOff).toDateString() : 'N/A' %> </p>
             <span> Bank Receipt 👉: 
-                <img src=" <%= order.Receipt %> " alt="" style="max-width: 200px;">
+                <img src=" <%= order.receipt %> " alt="" style="max-width: 200px;">
             </span>
 
             <form action="/order/<%=order._id%>?_method=PUT" method="POST">
-                <% if(!order.Status){ %>
+                <% if(!order.status){ %>
                     <button style="background-color: green; color: white;padding: 3px 2%;" type="submit">Accept</button>
                 <% } else{ %>
                     <p style="color: yellowgreen;"> 
@@ -50,6 +45,10 @@
         </div>
         <hr>
   <%  }) %>
+        </div>
+    
+    </div>
+   
 
 
 </body>

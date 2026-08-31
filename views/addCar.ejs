@@ -8,9 +8,7 @@
     <body>
         <%-include("partial/header.ejs") %>
     <div class="container">
-        <div class="sidebar">
-          
-        </div>
+        <%-include("partial/sidebar.ejs") %>
 
 
         <div class="mainBody">
@@ -37,10 +35,10 @@
             <div class="entrys">
                 <input type="file" name="file" accept="image/*">
             </div>
-            <div class="fuelType">
+            <div class="entrys">
                 <label>Fuel type</label>
-                <input type="radio" name="fuelType" value="Diesel">Diesel
-                <input type="radio" name="fuelType" value="Elecric">Electric
+                <input type="radio" name="fuelType" value="Diesel" required>Diesel
+                <input type="radio" name="fuelType" value="Electric">Electric
                 
             </div> 
             <div class="entrys">

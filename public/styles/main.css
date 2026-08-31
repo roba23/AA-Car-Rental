@@ -16,7 +16,12 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 100;
+    
 }
 
 .navigation > img{
@@ -32,6 +37,7 @@ body{
     font-size: 16px;
     justify-content: flex-start;
     align-items: center;
+    
     
 }
 .navigation > nav > ul > li a{
@@ -54,23 +60,58 @@ body{
 .container{
     background-color: white;
     display: grid;
-    grid-template-columns: 300px calc(100vw - 300px);   
+    grid-template-columns: 300px calc(100vw - 300px);  
+    
+    
 }
 .sidebar{
+   
    border-right: 30px solid rgb(234, 234, 227);
    border-bottom: 30px solid rgb(234, 234, 227);
+   
+   
+
+}
+.filter{
+  
+   border: 2px solid rgb(234, 234, 227);
+   padding: 10px 40px;
+   margin: 50px 15px;
 
 }
 .mainBody{
     display: flex;
     flex-wrap: wrap;
-    
     align-content: flex-start;
-    
-    padding: 20px;
-    row-gap: 10px;
+    gap: 30px;
+    justify-content:space-evenly;
+    padding: 30px;
     column-gap: 30px;
-    border-bottom: 30px solid rgb(200, 198, 198);
+    border-bottom: 30px solid rgb(234, 234, 227);
 
 }
 
+.filter{
+    position: fixed;
+}
+
+.sidebar a{
+    text-decoration: none;
+    width: inherit;
+    height: 100px;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 30px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.sidebar a:hover{
+    background-color: black;
+    color: white;
+}
+.active{
+    color: unset;
+    background-color: black;
+    color: white;
+    
+}

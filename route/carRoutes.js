@@ -5,24 +5,12 @@ import multer from "../middleware/multer.js";
 import {isloggedin, isAdmin} from "../middleware/authentication.js";
 const router = express.Router();
 
-<<<<<<< HEAD
-router.get("/", isloggedin, carController.getHomePage);
-router.post("/addCar", multer.single('file'),carController.addCar);
-router.get("/moreDetail/:id", carController.moreDetail);
-router.get("/admin", isloggedin, isAdmin, carController.adminPage);
-router.post("/orderCar",multer.single('receipt'), carController.orderCar);
-router.post("/search", carController.search);
-=======
 router.get("/", carController.getHomePage);
-router.get("/moreDetail/:id", carController.moreDetail);
-router.get("/admin", carController.adminPage);
-router.get('/orders', orderController.getOrderMessage)
-
-
 router.post("/addCar", multer.single('file'),carController.addCar);
-router.post('/postCars/order', multer.single('receipt'), orderController.makeOrder)
-
-router.put('/order/:id', orderController.acceptOrder)
-
->>>>>>> 8f673cb66ecf6445b1381a76c902dd74ecf02f7a
+router.get("/moreDetail/:id", carController.moreDetail);
+router.get("/addCar", isAdmin, carController.carAddForm);
+router.post("/orderCar",multer.single('receipt'), orderController.makeOrder);
+router.post("/search", carController.search);
+router.get("/orders",isAdmin, orderController.getOrderMessage);
+router.post("/order/:id", orderController.acceptOrder);
 export default router;

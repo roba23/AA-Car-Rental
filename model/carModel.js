@@ -53,12 +53,16 @@ const carSchema = new mongoose.Schema({
     },
     orderId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Orders",
+        ref: "orders",
         default: null,// B/c the car post is always posted before orders (order post exist. that is why we set null by default is the order is not exist.
     },
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
         
 });

@@ -8,7 +8,7 @@
        
     </head>
     <body>
-        <%-include("partial/header.ejs") %>
+        <%-include('partial/header.ejs') %>
         <div class="container">
             <div class="sidebar">
                      <div class="filter">
@@ -52,8 +52,8 @@
                  <% data.forEach(data => { %>
                     
                 <div class="card" onClick = "window.location.href='/moreDetail/<%=data._id %>'">
-                    <small style="position: relative; top: 0; right: 1%; background-color: <%= ( data.orderId && data.orderId.Status ) ? 'green' : 'red' %>; color: white;">
-                        <%= ( data.orderId && data.orderId.Status ) ? "Out" : "Available" %> 
+                    <small style="position: relative; top: 0; right: 1%; background-color: <%= (data.status ) ? 'green' : 'red' %>; color: white;">
+                        <%= ( data.status ) ? "Available" : "Out" %> 
                     </small>
 
                     <h4><%=data.name %></h4>

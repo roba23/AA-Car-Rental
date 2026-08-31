@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import  express from "express";
 import router from "./route/index.js";
 import bodyParser from "body-parser";
@@ -8,7 +7,7 @@ import {MongoStore} from "connect-mongo";
 import configurePassport from "./config/passportConfig.js";
 
 const app = express();
-const port = 3000;
+const PORT = 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
@@ -35,18 +34,6 @@ app.use(passport.session());
 configurePassport(passport);
 
 app.use('',router);
-=======
-
-import express from 'express'
-const app = express()
-import path from 'path'
-const PORT = 3000
-//import mongoose from 'mongoose'
-//import connectDb from './config/config.js'
-import methodOverride from 'method-override'
-import carRoute from './route/carRoutes.js' 
-//import orderRoute from './route/orderRoute'
->>>>>>> 8f673cb66ecf6445b1381a76c902dd74ecf02f7a
 
 import 'dotenv/config'
 
@@ -56,11 +43,10 @@ app.use( express.static('public'))
 app.use( express.urlencoded({extended:true}) )
 app.use( express.json() )
 
-app.use(methodOverride("_method"))
 
 
-app.use('/', carRoute)
-//app.use('/order', orderRoute)
+
+
 
 
 app.listen(process.env.PORT || PORT, ()=>{
