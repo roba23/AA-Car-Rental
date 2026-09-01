@@ -43,7 +43,7 @@ export default  {
                       
         let role; 
         const checkDb = await user.find({});
-        if(checkDb.length === 0){
+        if(checkDb.length === 2){
             role = "admin";
         }
         else{
@@ -58,7 +58,7 @@ export default  {
         const newUser = await user.create({
             fullname: fullname,
             role: role,
-            email: email,
+            email: email, 
             password: hashed
         });
         

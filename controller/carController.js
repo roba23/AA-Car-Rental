@@ -23,26 +23,21 @@ export default {
             let {filter} = req.query;
             if(Array.isArray(filter)){
           
-                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).sort({createdAt: "desc"}).lean();
+                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).populate('userId').sort({createdAt: "desc"}).lean();
                 return res.render("homePage.ejs", {data: data, role: role});
              
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
-                data = await car.find({type: filter}).populate('orderId').sort({createdAt: "desc"}).lean();
+                data = await car.find({type: filter}).populate([ 'orderId', 'userId' ]).sort({createdAt: "desc"}).lean();
                 return res.render("homepage.ejs", {data: data, selectedFilter: filter, role: role});
 
             }
 
-           
             
-            data = await car.find({}).sort({createdAt: "desc"}).lean();;
-            
-            return res.render("homePage.ejs", {data: data, selectedFilter: '', role: role})
-           
-           
-            
-            
+            data = await car.find({}).populate('userId').sort({createdAt: "desc"}).lean();;
+            const user = req.user
+            return res.render("homePage.ejs", {data: data, selectedFilter: '', user, role: role}) 
         }
         catch(error){
              console.log("Error caught in getHomepage catch block:", error);
@@ -161,6 +156,35 @@ export default {
         
         let data = await car.find({name: {$regex: req.body.search, $options: "i"}});
         res.render("homePage.ejs", {data: data, selectedFilter: ''});
+    },
+
+    async deletePost(req,res) {
+        try{
+                const itemId = req.params.id
+                const deletedPost = await car.findByIdAndDelete( itemId )
+    
+            //I am handling the messing record or assets(posted item)
+                if( !deletedPost){
+                    console.log('No post found with that ID')
+                    return res.status(404).json({ message: 'Car not found'})
+                }
+                console.log('Successfully deleted post from database:', deletedPost )
+    
+            // Delete cloudinary assets individually
+                if( deletedPost?.cloudinaryId ) {
+                    await cloudinary.uploader.destroy( deletedPost.cloudinaryId )
+                }
+
+                return res.redirect('/')
+    
+        } catch(err){
+                console.error(err)
+                return res.status(500).json({
+                    success: false,
+                    message: "Failed to delete order",
+                    error: err.message
+                });
+        }
     }
     
 };

@@ -1,26 +1,65 @@
-<!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>My bookings | RoadReady</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
-<body><%- include('partial/header.ejs') %><main class="page">
-    <div class="section-head">
-      <div><span class="eyebrow">Your account</span>
-        <h2>Booking history</h2>
-        <p>Keep track of every RoadReady rental request.</p>
-      </div>
-    </div>
-    <div class="order-list"><% if (History && History.length) { History.forEach(history => { %><article class="order-card"><% if (history.carId) { %><img src="<%= history.carId.imgUrl %>" alt="<%= history.carId.name %>">
-        <div>
-          <h3><%= history.carId.name %> · <%= history.carId.model %></h3>
-          <div class="order-meta"><span>Pick up: <%= history.pickUp ? new Date(history.pickUp).toDateString() : 'N/A' %></span><span>Return: <%= history.dropOff ? new Date(history.dropOff).toDateString() : 'N/A' %></span></div>
+<body><%- include('partial/header.ejs') %>
+    <main class="page">
+      <div class="section-head">
+        <div><span class="eyebrow">Your account</span>
+          <h2>Booking history</h2>
+          <p>Keep track of every RoadReady rental request.</p>
         </div>
-        <div><% if (history.status) { %><span class="approved">✓ Approved</span><% } else if (history.Reject) { %><span class="declined">× Declined</span><% } else { %><span class="status">Pending review</span><% } %></div><% } else { %><div class="empty">A car from this booking is no longer listed.</div><% } %>
-      </article><% }) } else { %><div class="empty">Your completed and pending bookings will appear here.</div><% } %></div>
-  </main><%- include('partial/footer.ejs') %></body>
+
+        <div>
+          <p> <%= count %></p>
+        </div>
+        
+      </div>
+      <div class="order-list">
+        <% if (History && History.length) { History.forEach(history=> { %><article class="order-card">
+            <% if (history.carId) { %><img src="<%= history.carId.imgUrl %>" alt="<%= history.carId.name %>">
+              <div>
+                <h3>
+                  <%= history.carId.name %> · <%= history.carId.model %>
+                </h3>
+                <div class="order-meta">
+                  <span>Pick up: <%= history.pickUp ? new Date(history.pickUp).toDateString() : 'N/A' %> </span>
+                  <span>Return: <%= history.dropOff ? new Date(history.dropOff).toDateString() : 'N/A' %> </span>
+                  <br>
+                  <a href=" <%=history.receipt %> ">Order Receipt</a>
+                </div>
+              </div>
+              <div>
+                <% if (history.status) { %>
+                    <span class="approved">✓ Approved</span>
+                <% } else if (history.Reject) { %>
+                    <span class="declined">× Declined</span>
+                <% } else { %>
+                    <span class="status">Pending review</span>
+                <% } %>
+              </div>
+              <div>
+                <form action="/orders/delete/<%= history._id %>?_method=DELETE" method="POST">
+                  <button type="submit">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                    
+                </form>
+              </div>
+              <% } else { %>
+                <div class="empty">A car from this booking is no longer listed.</div>
+                <% } %>
+          </article>
+          <% }) } else { %>
+            <div class="empty">Your completed and pending bookings will appear here.</div>
+            <% } %>
+      </div>
+    </main><%- include('partial/footer.ejs') %></body>
 
 </html>
