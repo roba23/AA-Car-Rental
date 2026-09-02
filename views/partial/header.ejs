@@ -728,11 +728,18 @@
   </nav>
 
   <div class="header-actions">
+
+    <% if(locals.user && user.fullname){ %>
+      <p> 
+          <span id="greeting" data-username="<%= user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1) %>"></span>.
+      </p>
+    <% }  %>
+
     <% if(locals.role){ %>
       <a class="login" href="/user/logout">Log Out</a>
     <% } else{%>
     <a class="login" href="/user/login">Log in</a>
     <% } %>
-    <a class="button" href="/user/register">Get started</a>
+
   </div>
 </header>

@@ -24,13 +24,14 @@ export default {
         try{
 
             const history = await orderDb.find( { $or:[ {status: true} , {Reject: true} ] }).populate('carId').sort({createdAt: "desc"}).lean();
-            
-            return res.render('orderHistory', {History: history})  // orders.carId.Model
+            const count = await orderDb.countDocuments( { $or:[ {status: true} , {Reject: true} ] } )
+
+            return res.render('orderHistory', {History: history, count})  // orders.carId.Model
             
         } catch(err){
             console.log(err)
         }
-    },
+    }, 
 
     async makeOrder (req,res) {
        try{
@@ -135,6 +136,35 @@ export default {
         }catch(err){
             console.error(err)
 
+        }
+    },
+
+    async deleteOrders(req,res) {
+        try{
+            const itemId = req.params.id
+            const deletedReceipt = await orderDb.findByIdAndDelete( itemId )
+
+        //I am handling the messing record or assets(posted item)
+            if( !deletedReceipt){
+                console.log('No post found with that ID')
+                return res.status(404).json({ message: 'Order not found'})
+            }
+            console.log('Successfully deleted post from database:', deletedReceipt )
+
+        // Delete cloudinary assets individually
+            if( deletedReceipt?.cloudinaryId ) {
+                await cloudinary.uploader.destroy( deletedReceipt.cloudinaryId )
+            }
+            
+            return res.redirect('/orders/history')
+
+        } catch(err){
+            console.error(err)
+            return res.status(500).json({
+                success: false,
+                message: "Failed to delete order",
+                error: err.message
+            });
         }
     }
 }

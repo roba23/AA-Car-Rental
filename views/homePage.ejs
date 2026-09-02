@@ -2,88 +2,131 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>RoadReady | Find your ride</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>RoadReady | Find your ride</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
-    <%- include('partial/header.ejs') %>
-        <section class="hero">
-            <div class="hero-copy"><span class="eyebrow" style="color:#ffb199">Your trip, your pace</span>
-                <h1>Drive the road your way.</h1>
-                <p>Book a reliable car in minutes. From city runabouts to roomy family SUVs, there is a RoadReady ride
-                    for every plan.</p><a class="button" href="#fleet">Browse available cars</a>
+  <%- include('partial/header.ejs') %>
+    <section class="hero">
+      <div class="hero-copy"><span class="eyebrow" style="color:#ffb199">Your trip, your pace</span>
+        <h1>Drive the road your way.</h1>
+        <p>Book a reliable car in minutes. From city runabouts to roomy family SUVs, there is a RoadReady ride for every
+          plan.</p>
+        <a class="button" href="#fleet">Browse available cars</a>
+      </div>
+      <div class="orbit">
+        <img class="hero-car" src="/images/hero-car.png" alt="Modern rental car">
+      </div>
+    </section>
+    <main class="page" id="fleet">
+      <div class="section-head">
+        <div><span class="eyebrow">Available fleet</span>
+          <h2>Choose your next ride</h2>
+          <p>Click a vehicle to view details and reserve it.</p>
+        </div>
+      </div>
+      <div class="browse-layout">
+        <aside class="filter-panel">
+          <h3>Filter cars</h3>
+          <form method="get" action="/">
+            <div class="filter-group">
+              <h4>Car type</h4>
+              <label class="filter-option">
+                <input type="radio" name="filter" value="" <%=!locals.selectedFilter ? 'checked' : '' %>
+                onChange="this.form.submit()">All cars
+              </label>
+              <label class="filter-option">
+                <input type="radio" name="filter" value="suv" <%=selectedFilter==='suv' ? 'checked' : '' %>
+                onChange="this.form.submit()">SUV
+              </label>
+              <label class="filter-option">
+                <input type="radio" name="filter" value="sedan" <%=selectedFilter==='sedan' ? 'checked' : '' %>
+                onChange="this.form.submit()">Sedan
+              </label>
+              <label class="filter-option">
+                <input type="radio" name="filter" value="hatchback" <%=selectedFilter==='hatchback' ? 'checked' : '' %>
+                onChange="this.form.submit()">Hatchback
+              </label>
+              <label class="filter-option">
+                <input type="radio" name="filter" value="pickup" <%=selectedFilter==='pickup' ? 'checked' : '' %>
+                onChange="this.form.submit()">Pickup
+              </label>
             </div>
-            <div class="orbit"></div><img class="hero-car" src="/images/hero-car.png" alt="Modern rental car">
-        </section>
-        <main class="page" id="fleet">
-            <div class="section-head">
-                <div><span class="eyebrow">Available fleet</span>
-                    <h2>Choose your next ride</h2>
-                    <p>Click a vehicle to view details and reserve it.</p>
-                </div>
+            <div class="filter-group">
+              <h4>Monthly price</h4>
+              <label class="filter-option">
+                <input type="radio" name="price" value="0-1000" onChange="this.form.submit()">Under $1,000
+              </label><label class="filter-option">
+                <input type="radio" name="price" value="1000-10000" onChange="this.form.submit()">$1,000 – $10,000
+              </label>
+              <label class="filter-option">
+                <input type="radio" name="price" value="10000-50000" onChange="this.form.submit()">$10,000 – $50,000
+              </label>
             </div>
-            <div class="browse-layout">
-                <aside class="filter-panel">
-                    <h3>Filter cars</h3>
-                    <form method="get" action="/">
-                        <div class="filter-group">
-                            <h4>Car type</h4><label class="filter-option"><input type="radio" name="filter" value=""
-                                    <%=!locals.selectedFilter ? 'checked' : '' %> onchange="this.form.submit()">All
-                                cars</label><label class="filter-option"><input type="radio" name="filter" value="suv"
-                                    <%=selectedFilter==='suv' ? 'checked' : '' %>
-                                onchange="this.form.submit()">SUV</label><label class="filter-option"><input
-                                    type="radio" name="filter" value="sedan" <%=selectedFilter==='sedan' ? 'checked'
-                                    : '' %> onchange="this.form.submit()">Sedan</label><label
-                                class="filter-option"><input type="radio" name="filter" value="hatchback"
-                                    <%=selectedFilter==='hatchback' ? 'checked' : '' %>
-                                onchange="this.form.submit()">Hatchback</label><label class="filter-option"><input
-                                    type="radio" name="filter" value="pickup" <%=selectedFilter==='pickup' ? 'checked'
-                                    : '' %> onchange="this.form.submit()">Pickup</label>
-                        </div>
-                        <div class="filter-group">
-                            <h4>Monthly price</h4><label class="filter-option"><input type="radio" name="price"
-                                    value="0-1000" onchange="this.form.submit()">Under $1,000</label><label
-                                class="filter-option"><input type="radio" name="price" value="1000-10000"
-                                    onchange="this.form.submit()">$1,000 – $10,000</label><label
-                                class="filter-option"><input type="radio" name="price" value="10000-50000"
-                                    onchange="this.form.submit()">$10,000 – $50,000</label>
-                        </div>
+          </form>
+        </aside>
+        <section class="cards-grid">
+          <% if (locals.data && data.length) { %>
+            <% data.forEach(car=> { %>
+              <article class="car-card" role="link" tabindex="0"
+                onclick="window.location.href='/moreDetail/<%= car._id %>'"
+                onkeydown="if(event.key==='Enter')this.click()">
+                <img src="<%= car.imgUrl %>" alt="<%= car.name %>">
+                <div class="card-content">
+                  <span class="status <%= car.status ? '' : 'out' %>">
+                    <%= car.status ? 'Available now' : 'Currently out' %>
+                  </span>
+                  <h3>
+                    <%= car.name %>
+                  </h3>
+                  <div class="car-meta"><span>
+                      <%= car.type %>
+                    </span><span>
+                      <%= car.capacity || '—' %> seats
+                    </span></div>
+                  <div class="price-row">
+                    <strong>$<%= car.priceMonthly %> 
+                      <small>/ month</small>
+                    </strong>
+                    <span>
+                      View details →
+                    </span>
+                  </div>
+
+            <%  if(car.userId && car.userId.role === 'admin') { %>
+                  <div>
+                    <form action="/addCar/delete/<%= car._id %>?_method=DELETE" method="POST">
+                      <button>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
                     </form>
-                </aside>
-                <section class="cards-grid">
-                    <% if (locals.data && data.length) { data.forEach(car=> { %><article class="car-card" role="link"
-                            tabindex="0" onclick="window.location.href='/moreDetail/<%= car._id %>'"
-                            onkeydown="if(event.key==='Enter')this.click()"><img src="<%= car.imgUrl %>"
-                                alt="<%= car.name %>">
-                            <div class="card-content"><span class="status <%= car.status ? '' : 'out' %>">
-                                    <%= car.status ? 'Available now' : 'Currently out' %>
-                                </span>
-                                <h3>
-                                    <%= car.name %>
-                                </h3>
-                                <div class="car-meta"><span>
-                                        <%= car.type %>
-                                    </span><span>
-                                        <%= car.capacity || '—' %> seats
-                                    </span></div>
-                                <div class="price-row"><strong>$<%= car.priceMonthly %> <small>/
-                                                month</small></strong><span>View details →</span></div>
-                            </div>
-                        </article>
-                        <% }) } else { %>
-                            <div class="empty">No cars match these filters. Try another selection.</div>
-                            <% } %>
-                </section>
-            </div>
-        </main>
-        <section id="how-it-works" style="background:#fff;padding:55px max(5vw,28px);text-align:center"><span
-                class="eyebrow">How it works</span>
-            <h2 style="margin:8px 0 12px">Book in three easy steps</h2>
-            <p style="color:#6b7280;margin:0">Choose a car, enter your trip details, and receive confirmation from our
-                team.</p>
-        </section><%- include('partial/footer.ejs') %>
+                  </div>
+            <%  }  %>
+
+                </div>
+              </article>
+              <% }) } else { %>
+                <div class="empty">No cars match these filters. Try another selection.</div>
+                <% } %>
+        </section>
+      </div>
+    </main>
+    <section id="how-it-works" style="background:#fff;padding:55px max(5vw,28px);text-align:center"><span
+        class="eyebrow">How it works</span>
+      <h2 style="margin:8px 0 12px">Book in three easy steps</h2>
+      <p style="color:#6b7280;margin:0">Choose a car, enter your trip details, and receive confirmation from our team.
+      </p>
+    </section>
+
+    <%- include('partial/footer.ejs') %>
+
+      <script type="text/javascript" src="/scripts/greetingTime.js"></script>
+
 </body>
 
 </html>
