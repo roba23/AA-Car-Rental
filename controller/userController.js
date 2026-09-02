@@ -7,12 +7,6 @@ import bcrypt from "bcrypt";
 import passport from "passport";
 
 export default  {
-    async logOUt(req,res){
-        req.session.destroy();
-        res.clearCookie('car_rental');
-        res.redirect("/");
-
-    },
     async getLogin(req,res){
         if(req.query.error){
             return res.render("login.ejs", {error: req.query.error});
@@ -49,7 +43,7 @@ export default  {
                       
         let role; 
         const checkDb = await user.find({});
-        if(checkDb.length === 0){
+        if(checkDb.length === 2){
             role = "admin";
         }
         else{
@@ -64,7 +58,7 @@ export default  {
         const newUser = await user.create({
             fullname: fullname,
             role: role,
-            email: email,
+            email: email, 
             password: hashed
         });
         
