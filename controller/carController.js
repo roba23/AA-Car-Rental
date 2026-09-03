@@ -26,6 +26,7 @@ export default {
                 data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).populate('userId', 'role').sort({createdAt: "desc"}).lean();
                 return res.render("homePage.ejs", {data: data, role: role});
              
+                
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
