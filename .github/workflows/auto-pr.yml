@@ -9,25 +9,30 @@ on:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
-    # This explicitly overrides UI settings and grants write access
     permissions:
-      contents: write
+      contents: read
       pull-requests: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Auto-generated PR from pushed branch"
-          branch: ${{ github.ref_name }}
-          base: main 
-          title: "PR: Merge ${{ github.ref_name }} into main"
-          body: |
-            This Pull Request was automatically created because a new branch was pushed.
-            
-            **Author:** @${{ github.actor }}
-            **Branch:** `${{ github.ref_name }}`
+      - name: Create Pull Request with GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if a PR already exists for this branch to prevent errors
+          PR_EXISTS=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number')
+          
+          if [ -z "$PR_EXISTS" ]; then
+            gh pr create \
+              --base main \
+              --head "${{ github.ref_name }}" \
+              --title "PR: Merge ${{ github.ref_name }} into main" \
+              --body "This Pull Request was automatically created because a new branch was pushed.
+              
+              **Author:** @${{ github.actor }}
+              **Branch:** \`${{ github.ref_name }}\`"
+          else
+            echo "A pull request already exists for this branch. Skipping creation."
+          fi

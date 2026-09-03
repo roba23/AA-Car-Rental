@@ -23,20 +23,22 @@ export default {
             let {filter} = req.query;
             if(Array.isArray(filter)){
           
-                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).populate('userId').sort({createdAt: "desc"}).lean();
+                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).populate('userId', 'role').sort({createdAt: "desc"}).lean();
                 return res.render("homePage.ejs", {data: data, role: role});
              
+                
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
-                data = await car.find({type: filter}).populate([ 'orderId', 'userId' ]).sort({createdAt: "desc"}).lean();
+                data = await car.find({type: filter}).populate([ 'orderId', {path: 'userId', select: 'role'} ]).sort({createdAt: "desc"}).lean();
                 return res.render("homepage.ejs", {data: data, selectedFilter: filter, role: role});
 
             }
 
             
-            data = await car.find({}).populate('userId').sort({createdAt: "desc"}).lean();;
-            const user = req.user
+            data = await car.find({}).populate('userId', 'role').sort({createdAt: "desc"}).lean();;
+            const user = req.user;
+          
             return res.render("homePage.ejs", {data: data, selectedFilter: '', user, role: role}) 
         }
         catch(error){
@@ -107,8 +109,8 @@ export default {
            
            
            const featuresArray = req.body.feature;
-           console.log(featuresArray);
-           console.log("data is:", req.body);
+           
+          
             
             // 3. Database operation will now run successfully
             const m = await car.create({
@@ -122,7 +124,7 @@ export default {
                 capacity: req.body.capacity,
                 shifting: req.body.shifting,
                 priceMonthly: req.body.priceMonthly,
-                //priceYearly: req.body.priceYearly,
+                userId: req.user._id,
                 milage: req.body.milage,
                 features: featuresArray,
             });
@@ -160,9 +162,11 @@ export default {
 
     async deletePost(req,res) {
         try{
+
                 const itemId = req.params.id
+                
                 const deletedPost = await car.findByIdAndDelete( itemId )
-    
+               
             //I am handling the messing record or assets(posted item)
                 if( !deletedPost){
                     console.log('No post found with that ID')
@@ -171,7 +175,7 @@ export default {
                 console.log('Successfully deleted post from database:', deletedPost )
     
             // Delete cloudinary assets individually
-                if( deletedPost?.cloudinaryId ) {
+                 if( deletedPost?.cloudinaryId ) {
                     await cloudinary.uploader.destroy( deletedPost.cloudinaryId )
                 }
 
