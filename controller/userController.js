@@ -34,6 +34,31 @@ export default  {
         
 
     },
+
+    async logout(req, res, next) {
+        // 1. Check user role BEFORE logging out / destroying session
+            const userRole = req.user ? req.user.role : null;
+
+        // 2. Log out the user from Passport
+            req.logout(function (err) {
+                if (err) { return next(err); }
+                console.log('User has logged out.');
+
+                // 3. Destroy session
+                req.session.destroy((err) => {
+                    if (err) {
+                        console.log('Error : Failed to destroy the session during logout.', err);
+                    }
+
+              // 4. Clear cookie
+                      res.clearCookie('connect.sid');
+
+              // 5. Redirect the user to the the login page
+                      return res.redirect('/user/login');
+                });
+            });
+    },
+
     async getRegister(req,res){
        
         res.render("register.ejs");

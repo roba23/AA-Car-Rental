@@ -32,13 +32,16 @@
                   <span>Pick up: <%= history.pickUp ? new Date(history.pickUp).toDateString() : 'N/A' %> </span>
                   <span>Return: <%= history.dropOff ? new Date(history.dropOff).toDateString() : 'N/A' %> </span>
                   <br>
-                  <a href=" <%=history.receipt %> ">Order Receipt</a>
+                  <a href="http://localhost:3000/api/payment-success?tx_ref=<%=history.tx_ref %>"
+                     style="display:inline-block;margin-top:10px;color:#e85320;font-size:.82rem;font-weight:700">
+                      Order Receipt ↗
+                  </a>
                 </div>
               </div>
               <div>
-                <% if (history.status) { %>
+                <% if (history.status === "success") { %>
                     <span class="approved">✓ Approved</span>
-                <% } else if (history.Reject) { %>
+                <% } else if (history.status === "failed") { %>
                     <span class="declined">× Declined</span>
                 <% } else { %>
                     <span class="status">Pending review</span>

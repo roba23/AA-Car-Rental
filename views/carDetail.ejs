@@ -7,32 +7,151 @@
   <title>Car details | RoadReady</title>
 </head>
 
-<body><%- include('partial/header.ejs') %><main class="page"><% if (locals.data) { %><div class="detail-grid"><img class="detail-photo" src="<%= data.imgUrl %>" alt="<%= data.name %>">
-      <div>
-        <section class="detail-panel"><span class="status <%= data.status ? '' : 'out' %>"><%= data.status ? 'Available to book' : 'Currently unavailable' %></span>
-          <h1><%= data.name %></h1>
-          <p><%= data.description %></p>
-          <div class="specs">
-            <div class="spec"><small>Model</small><strong><%= data.model %></strong></div>
-            <div class="spec"><small>Type</small><strong><%= data.type %></strong></div>
-            <div class="spec"><small>Passengers</small><strong><%= data.capacity %> seats</strong></div>
-            <div class="spec"><small>Fuel</small><strong><%= data.fuelType %></strong></div>
-            <div class="spec"><small>Transmission</small><strong><%= data.shifting || '-' %></strong></div>
-            <div class="spec"><small>Mileage</small><strong><%= data.milage || '-' %></strong></div>
+<body><%- include('partial/header.ejs') %>
+    <main class="page">
+      <% if (locals.data) { %>
+        <div class="detail-grid"><img class="detail-photo" src="<%= data.imgUrl %>" alt="<%= data.name %>">
+          <div>
+            <section class="detail-panel"><span class="status <%= data.status ? '' : 'out' %>">
+                <%= data.status === "success"  ? 'Available to book' : 'Currently unavailable' %>
+              </span>
+              <h1>
+                <%= data.name %>
+              </h1>
+              <p>
+                <%= data.description %>
+              </p>
+              <div class="specs">
+                <div class="spec">
+                  <small>Model</small>
+                  <strong>
+                    <%= data.model %>
+                  </strong></div>
+                <div class="spec">
+                  <small>Type</small>
+                  <strong>
+                    <%= data.type %>
+                  </strong></div>
+                <div class="spec">
+                  <small>Passengers</small>
+                  <strong>
+                    <%= data.capacity %> seats
+                  </strong></div>
+                <div class="spec">
+                  <small>Fuel</small>
+                  <strong>
+                    <%= data.fuelType %>
+                  </strong></div>
+                <div class="spec">
+                  <small>Transmission</small>
+                  <strong>
+                    <%= data.shifting || '-' %>
+                  </strong></div>
+                <div class="spec">
+                  <small>Mileage</small>
+                  <strong>
+                    <%= data.milage || '-' %>
+                  </strong></div>
+              </div>
+              <div class="price-row">
+                <strong>$<%= data.priceMonthly %> 
+                  <small>/ month</small>
+                </strong>
+                <span>$<%=
+                    data.priceYearly %> yearly
+                </span>
+              </div>
+            </section>
+         <% if (data.status === "success") { %>
+              <section class="booking-card">
+                <h3>Reserve this car</h3>
+            <!--    <form action="/orderCar" method="post" enctype="multipart/form-data" class="form-grid"><input
+                    type="hidden" name="carId" value="<%= data._id %>">
+                  <div class="form-field"><label>Full name</label><input required type="text" name="name"
+                      placeholder="Your full name"></div>
+                  <div class="form-field"><label>Phone</label><input required type="tel" name="phone"
+                      placeholder="+251 xxx xxx xxx"></div>
+                  <div class="form-field"><label>Pick-up</label><input required type="date" name="pickUp"></div>
+                  <div class="form-field"><label>Drop-off</label><input required type="date" name="dropOff"></div>
+                  <div class="form-field full"><label>Payment receipt</label><input required type="file" name="receipt"
+                      accept="image/*"></div>
+                  <div class="form-field full"><button type="submit">Request booking</button></div>
+                </form>  -->
+                <form action="/api/pay" method="post">
+                    <div class="form-group">
+                        <div>
+                            <input type="hidden" name="carId"  value= "<%= data._id %>"  />
+                        </div>
+                        <div class="form-field">
+                          <label id="first_name">First Name</label>
+                          <input type="text" name="first_name" placeholder="Full Name" required  />
+                        </div>
+                        <div class="form-field">
+                          <label id="last_name">Last Name</label>
+                          <input type="text" name="last_name" placeholder="Last Name" required  />
+                        </div>
+                        <div class="form-field">
+                          <label id="phone">Email</label>
+                          <input type="tel" name="phone" placeholder="+251-xxx-xxx-xxx" required  />
+                        </div>
+                        <div class="form-field">
+                          <label id="email">Email</label>
+                          <input type="email" name="email" placeholder="Email Address" required  />
+                        </div>
+                        <div class="form-field">
+                          <label id="amount">amount</label>
+                          <input id="amounts" type="number" name="amount" value="<%= data.priceMonthly %>"  readonly /> 
+                        </div>
+                        <div class="form-field">
+                          <label id="pickUp">Pick-up</label>
+                          <input id="pickUpp" required type="date" name="pickUp">
+                        </div>
+                        <div class="form-field">
+                          <label id="dropOff">Drop-off</label>
+                          <input id="dropOffs" required type="date" name="dropOff">
+                        </div>
+                        <button type="submit">Pay with Chapa</button>
+                    </div>
+              </form>
+              </section> 
+            <% } %>
           </div>
-          <div class="price-row"><strong>$<%= data.priceMonthly %> <small>/ month</small></strong><span>$<%= data.priceYearly %> yearly</span></div>
-        </section><% if (data.status) { %><section class="booking-card">
-          <h3>Reserve this car</h3>
-          <form action="/orderCar" method="post" enctype="multipart/form-data" class="form-grid"><input type="hidden" name="carId" value="<%= data._id %>">
-            <div class="form-field"><label>Full name</label><input required type="text" name="name" placeholder="Your full name"></div>
-            <div class="form-field"><label>Phone</label><input required type="tel" name="phone" placeholder="+251 xxx xxx xxx"></div>
-            <div class="form-field"><label>Pick-up</label><input required type="date" name="pickUp"></div>
-            <div class="form-field"><label>Drop-off</label><input required type="date" name="dropOff"></div>
-            <div class="form-field full"><label>Payment receipt</label><input required type="file" name="receipt" accept="image/*"></div>
-            <div class="form-field full"><button type="submit">Request booking</button></div>
-          </form>
-        </section><% } %>
-      </div>
-    </div><% } else { %><div class="empty">We couldn’t find that car.</div><% } %></main><%- include('partial/footer.ejs') %></body>
+        </div>
+    <% } else { %>
+        <div class="empty">
+            We couldn’t find that car.
+        </div>
+      <% } %>
+    </main>
+  <script>
+  const pickUpInput = document.getElementById('pickUpp');
+  const dropOffInput = document.getElementById('dropOffs');
+  const amountInput = document.getElementById('amounts');
+
+  // Convert monthly price to a daily rate
+  const monthlyPrice = Number('<%= data.priceMonthly %>');
+  const dailyPrice = monthlyPrice / 30; 
+
+  function calculateAmount() {
+    if (pickUpInput.value && dropOffInput.value) {
+      const pickDate = new Date(pickUpInput.value);
+      const dropDate = new Date(dropOffInput.value);
+
+      const diffInMs = dropDate - pickDate;
+      const days = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+      const totalDays = days > 0 ? days : 1;
+      
+      // Multiply days by daily rate
+      const totalAmount = (totalDays * dailyPrice).toFixed(2);
+      amountInput.value = totalAmount;
+    }
+  }
+
+  pickUpInput.addEventListener('change', calculateAmount);
+  dropOffInput.addEventListener('change', calculateAmount);
+</script>
+
+  </body>
 
 </html>

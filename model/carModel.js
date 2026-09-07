@@ -65,9 +65,10 @@ const carSchema = new mongoose.Schema({
         default: Date.now
     },
     status: {
-        type: Boolean,
-        default: true
-    }
+        type: String,
+        enum: [ 'pending', 'success', 'failed'],
+        default: 'success'
+    },
         
 });
 
