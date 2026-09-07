@@ -7,42 +7,57 @@
   <title>Add car | RoadReady</title>
 </head>
 
-<body><%- include('partial/header.ejs') %><main class="admin-layout"><%- include('partial/sidebar.ejs') %><section class="form-card"><span class="eyebrow">Fleet management</span>
-      <h1>Add a vehicle</h1>
-      <p>Create a polished listing for a new rental car.</p>
-      <form action="/addCar" method="post" enctype="multipart/form-data" class="form-grid">
-        <div class="form-field"><label>Car name</label><input required type="text" name="name" placeholder="e.g. Toyota RAV4"></div>
-        <div class="form-field"><label>Model</label><input required type="text" name="model" placeholder="e.g. 2024"></div>
-        <div class="form-field"><label>Type</label><select name="type" required>
-            <option value="">Choose type</option>
-            <option value="sedan">Sedan</option>
-            <option value="suv">SUV</option>
-            <option value="hatchback">Hatchback</option>
-            <option value="pickup">Pickup</option>
-            <option value="minivan">Minivan</option>
-          </select></div>
-        <div class="form-field"><label>Fuel type</label><select name="fuelType" required>
-            <option value="Diesel">Diesel</option>
-            <option value="Electric">Electric</option>
-            <option value="Petrol">Petrol</option>
-            <option value="Hybrid">Hybrid</option>
-          </select></div>
-        <div class="form-field"><label>Capacity</label><input required type="number" min="1" name="capacity" placeholder="Seats"></div>
-        <div class="form-field"><label>Transmission</label><select name="shifting">
-            <option value="automatic">Automatic</option>
-            <option value="manual">Manual</option>
-          </select></div>
-        <div class="form-field"><label>Monthly price</label><input required type="number" min="0" name="priceMonthly" placeholder="USD"></div>
-        <div class="form-field"><label>Yearly price</label><input type="number" min="0" name="priceYearly" placeholder="USD"></div>
-        <div class="form-field"><label>Mileage</label><input type="number" min="0" name="milage" placeholder="km"></div>
-        <div class="form-field"><label>Car photo</label><input required type="file" name="file" accept="image/*"></div>
-        <div class="form-field full"><label>Description</label><textarea name="description" rows="4" placeholder="Describe the car, condition, and what makes it a great rental."></textarea></div>
-        <div class="form-field full"><label>Features</label>
-          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:5px"><label class="filter-option"><input type="checkbox" value="Seat warmer" name="feature">Seat warmer</label><label class="filter-option"><input type="checkbox" value="AC" name="feature">A/C</label><label class="filter-option"><input type="checkbox" value="Assisted parking" name="feature">Assisted parking</label><label class="filter-option"><input type="checkbox" value="Adaptive cruise control" name="feature">Cruise control</label></div>
-        </div>
-        <div class="form-field full"><button type="submit">Add vehicle</button></div>
-      </form>
-    </section>
-  </main><%- include('partial/footer.ejs') %></body>
+<body><%- include('partial/header.ejs') %>
+    <main class="admin-layout"><%- include('partial/sidebar.ejs') %>
+        <section class="form-card"><span class="eyebrow">Fleet management</span>
+          <h1>Add a vehicle</h1>
+          <p>Create a polished listing for a new rental car.</p>
+          <form action="/addCar" method="post" enctype="multipart/form-data" class="form-grid">
+            <div class="form-field"><label>Car name</label><input required type="text" name="name"
+                placeholder="e.g. Toyota RAV4"  required></div>
+            <div class="form-field"><label>Model</label><input required type="text" name="model"
+                placeholder="e.g. 2024" required></div>
+            <div class="form-field"><label>Type</label><select name="type" required>
+                <option value="">Choose type</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="pickup">Pickup</option>
+                <option value="minivan">Minivan</option>
+              </select></div>
+            <div class="form-field"><label>Fuel type</label><select name="fuelType" required>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Hybrid">Hybrid</option>
+              </select></div>
+            <div class="form-field"><label>Capacity</label><input required type="number" min="1" name="capacity"
+                placeholder="Seats"></div>
+            <div class="form-field"><label>Transmission</label><select name="shifting" required>
+                <option value="automatic">Automatic</option>
+                <option value="manual">Manual</option>
+              </select></div>
+            <div class="form-field"><label>Monthly price</label><input required type="number" min="0" name="priceDaily"
+                placeholder="ETB"  required></div>
+            <div class="form-field"><label>Yearly price</label><input type="number" min="0" name="priceYearly"
+                placeholder="ETB"  required></div>
+            <div class="form-field"><label>Mileage</label><input type="number" min="0" name="milage" placeholder="km" required>
+            </div>
+            <div class="form-field"><label>Car photo</label><input required type="file" name="file" accept="image/*" >
+            </div>
+            <div class="form-field full"><label>Description</label><textarea name="description" rows="4"
+                placeholder="Describe the car, condition, and what makes it a great rental." required></textarea></div>
+            <div class="form-field full"><label>Features</label>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:5px"><label class="filter-option"><input
+                    type="checkbox" value="Seat warmer" name="feature">Seat warmer</label><label
+                  class="filter-option"><input type="checkbox" value="AC" name="feature" required>A/C</label><label
+                  class="filter-option"><input type="checkbox" value="Assisted parking" name="feature" required>Assisted
+                  parking</label><label class="filter-option"><input type="checkbox" value="Adaptive cruise control"
+                    name="feature" required>Cruise control</label></div>
+            </div>
+            <div class="form-field full"><button type="submit">Add vehicle</button></div>
+          </form>
+        </section>
+    </main><%- include('partial/footer.ejs') %></body>
 
 </html>

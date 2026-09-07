@@ -76,8 +76,8 @@
                 onkeydown="if(event.key==='Enter')this.click()">
                 <img src="<%= car.imgUrl %>" alt="<%= car.name %>">
                 <div class="card-content">
-                  <span class="status <%= car.status ? '' : 'out' %>">
-                    <%= car.status ? 'Available now' : 'Currently out' %>
+                  <span class="status <%= car.status === "success" ? '' : 'out' %>">
+                    <%= car.status === "success"  ? 'Available now' : 'Currently out' %>
                   </span>
                   <h3>
                     <%= car.name %>
@@ -100,7 +100,8 @@
                   <div>
                     <form action="/addCar/delete/<%= car._id %>?_method=DELETE" method="POST">
                       <button class="button" type="submit">
-                        <i class="fa-solid fa-trash"></i>Delete
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
                       </button>
                     </form>
                   </div>
@@ -110,7 +111,7 @@
               </article>
               <% }) } else { %>
                 <div class="empty">No cars match these filters. Try another selection.</div>
-                <% } %>
+              <% } %>
         </section>
       </div>
     </main>
@@ -123,7 +124,7 @@
 
     <%- include('partial/footer.ejs') %>
 
-      <script type="text/javascript" src="/scripts/greetingTime.js"></script>
+    <script type="text/javascript" src="/scripts/greetingTime.js"></script>
 
 </body>
 

@@ -23,7 +23,7 @@ export default {
             let {filter} = req.query;
             if(Array.isArray(filter)){
           
-                data = await car.find({priceMonthly:{$lte: filter[1], $gte: filter[0]}}).populate('userId', 'role').sort({createdAt: "desc"}).lean();
+                data = await car.find({priceDaily:{$lte: filter[1], $gte: filter[0]}}).populate('userId', 'role').sort({createdAt: "desc"}).lean();
                 return res.render("homePage.ejs", {data: data, role: role});
              
                 
@@ -54,13 +54,14 @@ export default {
    
     async moreDetail(req,res){
         try{
+
             const id = req.params.id;
             console.log("id:", id);
 
-            const data = await car.findById({_id: id}).populate('orderId').lean();
+            const data = await car.findById({_id: id}).populate( ['orderId', 'userId'] ).lean();
             console.log("selected car :", data);
 
-            res.render("carDetail.ejs", {data: data});
+            res.render("carDetail.ejs", {data: data, total : totalDays});
         }
         catch(error){
             console.error("getCar:", error);
@@ -123,7 +124,7 @@ export default {
                 fuelType: req.body.fuelType,
                 capacity: req.body.capacity,
                 shifting: req.body.shifting,
-                priceMonthly: req.body.priceMonthly,
+                priceMonthly: req.body.priceDaily,
                 userId: req.user._id,
                 milage: req.body.milage,
                 features: featuresArray,

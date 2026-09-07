@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Receipt</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 40px; }
+    .receipt-box { max-width: 650px; margin: 0 auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .header { background: #0c2340; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .header h2 { margin: 0; color: #10b981; }
+    .banner { background: #10b981; color: #fff; padding: 10px 20px; font-weight: bold; text-transform: uppercase; }
+    .content { padding: 20px; }
+    .row { display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px #eee solid; padding-bottom: 8px; }
+    .label { color: #666; font-size: 14px; }
+    .value { font-weight: bold; color: #333; font-size: 14px; }
+    .actions { padding: 20px; text-align: center; }
+    .btn { padding: 10px 20px; margin: 5px; border: none; cursor: pointer; border-radius: 4px; }
+    .btn-print { background: #10b981; color: white; }
+  </style>
+</head>
+<body>
+
+  <div class="receipt-box">
+    <div class="header">
+      <h2>Chapa</h2>
+      <h1>RECEIPT</h1>
+    </div>
+    
+    <div class="banner">PAYMENT DETAILS</div>
+
+    <div class="content">
+      <div class="row">
+        <span class="label">Payee Name</span>
+        <span class="value"><%= receipt.first_name %> <%= receipt.last_name %></span>
+      </div>
+      <div class="row">
+        <span class="label">Email Address</span>
+        <span class="value"><%= receipt.email %></span>
+      </div>
+      <div class="row">
+        <span class="label">Payment Method</span>
+        <span class="value"><%= receipt.method || 'Test / Telebirr / Card' %></span>
+      </div>
+      <div class="row">
+        <span class="label">Status</span>
+        <span class="value" style="color: #10b981;"><%= receipt.status %></span>
+      </div>
+      <div class="row">
+        <span class="label">Payment Date</span>
+        <span class="value"><%= new Date(receipt.created_at).toLocaleString() %></span>
+      </div>
+      <div class="row">
+        <span class="label">Tx Reference</span>
+        <span class="value"><%= receipt.tx_ref %></span>
+      </div>
+      <div class="row">
+        <span class="label">Chapa Reference</span>
+        <span class="value"><%= receipt.reference %></span>
+      </div>
+      <div class="row">
+        <span class="label">Amount Paid</span>
+        <span class="value"><%= receipt.amount %> <%= receipt.currency %></span>
+      </div>
+      <div class="row">
+        <span class="label">Charge / Fee</span>
+        <span class="value"><%= receipt.charge || 0 %> <%= receipt.currency %></span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-print" onclick="window.print()">Print Receipt</button>
+      <a href="/"><button class="btn">Return to Home</button></a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,16 +1,17 @@
-import orderDb from '../model/orderModel.js'
-import cloudinary from '../middleware/cloudinary.js'
-import sharp  from 'sharp'
-import streamifier  from 'streamifier'
+//import orderDb from '../model/orderModel.js'
+//import cloudinary from '../middleware/cloudinary.js'
+//import sharp  from 'sharp'
+//import streamifier  from 'streamifier'
 import mongoose from 'mongoose'
 import car from '../model/carModel.js'
+import Chapa from '../model/chapaModel.js'
 
 export default {
 
     async getOrderMessage (req,res){
         try{
          //   const targetOrder = req.params.id
-            const order = await orderDb.find({status: false, Reject: false}).populate('carId').sort({createdAt: "desc"}).lean();
+            const order = await Chapa.find({ status: "pending" }).populate('carId').sort({createdAt: "desc"}).lean();
             
             return res.render('order', {orders: order})  // orders.carId.Model
             
@@ -23,8 +24,8 @@ export default {
     async getOrderHistory (req,res){
         try{
 
-            const history = await orderDb.find( { $or:[ {status: true} , {Reject: true} ] }).populate('carId').sort({createdAt: "desc"}).lean();
-            const count = await orderDb.countDocuments( { $or:[ {status: true} , {Reject: true} ] } )
+            const history = await Chapa.find( { $or:[ {status: "success"} , {status: "failed"} ] }).populate('carId').sort({createdAt: "desc"}).lean();
+            const count = await Chapa.countDocuments( { $or:[ {status: "success"} , {status: "failed"} ] } )
 
             return res.render('orderHistory', {History: history, count})  // orders.carId.Model
             
@@ -33,7 +34,7 @@ export default {
         }
     }, 
 
-    async makeOrder (req,res) {
+ /*   async makeOrder (req,res) {
        try{
             
             if (!req.file) {
@@ -85,15 +86,16 @@ export default {
             });
         
         }
-    },
+    },     */
 
-     async acceptOrder(req,res) {
+
+    async acceptOrder(req,res) {
         try{
             const orderId = req.params.id
-            const theOrder = await orderDb.findOneAndUpdate( 
+            const theOrder = await Chapa.findOneAndUpdate( 
                 {_id: orderId},
                 { $set:
-                    { status: true }
+                    { status: "success" }
                 },
                 {
                     sort:{_id: -1},
@@ -103,7 +105,7 @@ export default {
         
             await car.findByIdAndUpdate( theOrder.carId,
                 { $set:
-                    {status:false}
+                    {status:"pending"}
                 });
             return res.redirect('/')
 
@@ -113,13 +115,13 @@ export default {
         }
     },
 
-    async markAsAvailable(req,res) {
+    async declineOrder(req,res) {
         try{
             const orderId = req.params.id
-            const theOrder = await orderDb.findOneAndUpdate( 
+            const theOrder = await Chapa.findOneAndUpdate( 
                 {_id: orderId},
                 { $set:
-                    { Reject: true }
+                    { status: "failed" }
                 },
                 {
                     sort:{_id: -1},
@@ -129,7 +131,7 @@ export default {
         
             await car.findByIdAndUpdate( theOrder.carId,
                 { $set:
-                    {Reject:false}
+                    {status: "pending"}
                 });
             return res.redirect('/')
 
@@ -142,7 +144,7 @@ export default {
     async deleteOrders(req,res) {
         try{
             const itemId = req.params.id
-            const deletedReceipt = await orderDb.findByIdAndDelete( itemId )
+            const deletedReceipt = await Chapa.findByIdAndDelete( itemId )
 
         //I am handling the messing record or assets(posted item)
             if( !deletedReceipt){

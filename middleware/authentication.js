@@ -1,15 +1,11 @@
 
-export async function isloggedin(req,res,next) {
-  
-        if(req.isAuthenticated()){
-          
-            return next();
-        }
+export async function isLoggedIn(req,res,next) {
 
-    
+        if(req.isAuthenticated()){
+            return next();
+        } else {
             return res.redirect("/user/login");
-        
-    
+        }
 }
 
 export async function isAdmin(req,res,next){
