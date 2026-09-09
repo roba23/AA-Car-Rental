@@ -61,7 +61,7 @@ export default {
             const data = await car.findById({_id: id}).populate( ['orderId', 'userId'] ).lean();
             console.log("selected car :", data);
 
-            res.render("carDetail.ejs", {data: data, total : totalDays});
+            res.render("carDetail.ejs", {data: data});
         }
         catch(error){
             console.error("getCar:", error);
