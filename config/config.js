@@ -2,6 +2,7 @@ import dns from 'dns';//This fix mongodb connection problem.
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 import mongoose from "mongoose";
+
 import 'dotenv/config';
 
 
