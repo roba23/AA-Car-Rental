@@ -730,6 +730,7 @@
   <div class="header-actions">
 
     <% if(locals.user && user.fullname){ %>
+      
       <p> 
           <span id="greeting" data-username="<%= user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1) %>"></span>
       </p>

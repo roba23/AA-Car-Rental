@@ -54,14 +54,19 @@ export default {
     
     async moreDetail(req,res){
         try{
+            let role = null;
+            if(req.user){
+                   role = req.user.role;
+               
+            }
 
             const id = req.params.id;
             console.log("id:", id);
 
             const data = await car.findById({_id: id}).populate( ['orderId', 'userId'] ).lean();
-            console.log("selected car :", data);
-
-            res.render("carDetail.ejs", {data: data});
+           
+             const user = req.user;
+            res.render("carDetail.ejs", {data: data, role: role, user: user});
         }
         catch(error){
             console.error("getCar:", error);
@@ -70,7 +75,7 @@ export default {
 
     async carAddForm(req,res){
         try{
-            return res.render("addCar.ejs");
+            return res.render("addCar.ejs", {role: "admin", user: req.user});
         } catch(err){
             console.error(err)
             return res.status(404).json({

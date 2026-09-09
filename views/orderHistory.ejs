@@ -8,7 +8,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
-<body><%- include('partial/header.ejs') %>
+<body>
+    <%- include('partial/header.ejs') %>
     <main class="page">
       <div class="section-head">
         <div><span class="eyebrow">Your account</span>
@@ -63,6 +64,8 @@
             <div class="empty">Your completed and pending bookings will appear here.</div>
             <% } %>
       </div>
-    </main><%- include('partial/footer.ejs') %></body>
+    </main><%- include('partial/footer.ejs') %>
+    <script type="text/javascript" src="/scripts/greetingTime.js"></script>
+  </body>
 
 </html>
