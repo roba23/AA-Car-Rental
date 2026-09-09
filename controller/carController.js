@@ -143,16 +143,8 @@ export default {
             });
         }
     },
-    async moreDetail(req,res){
-        try{
-            const id = req.params.id;
-            const data = await car.findById({_id: id});
-            res.render("cardetail.ejs", {data: data});
-        }
-        catch(error){
-            console.error("getCar:", error);
-        }
-    },
+ 
+    
     async search(req,res){
         
         let {search} = req.body;
