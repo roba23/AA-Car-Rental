@@ -7,7 +7,10 @@
   <title>Car details | RoadReady</title>
 </head>
 
-<body><%- include('partial/header.ejs') %>
+<body>
+
+<%- include('partial/header.ejs') %>
+
     <main class="page">
       <% if (locals.data) { %>
         <div class="detail-grid"><img class="detail-photo" src="<%= data.imgUrl %>" alt="<%= data.name %>">
