@@ -44,14 +44,7 @@
                     <span class="status">Pending review</span>
                 <% } %>
               </div>
-              <div>
-                <form action="/orders/delete/<%= history._id %>?_method=DELETE" method="POST">
-                  <button type="submit">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                    
-                </form>
-              </div>
+            
               <% } else { %>
                 <div class="empty">A car from this booking is no longer listed.</div>
                 <% } %>
