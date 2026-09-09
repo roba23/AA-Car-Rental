@@ -131,7 +131,7 @@ export default {
         
             await car.findByIdAndUpdate( theOrder.carId,
                 { $set:
-                    {status: "pending"}
+                    {status: "success"}
                 });
             return res.redirect('/')
 
