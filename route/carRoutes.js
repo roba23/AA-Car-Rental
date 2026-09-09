@@ -22,7 +22,7 @@ router.put("/order/:id", orderController.acceptOrder);
 router.put("/decline/:id", orderController.declineOrder);
 //router.post("/orderCar",multer.single('receipt'), orderController.makeOrder);
 router.delete("/orders/delete/:id", orderController.deleteOrders);
-
+router.get("/user/order/history",isLoggedIn, orderController.getUserHistory)
 //Chapa Routes
 
 router.get("/", paymentController.getOrderButton)
