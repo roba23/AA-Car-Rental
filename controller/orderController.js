@@ -7,7 +7,14 @@ import car from '../model/carModel.js'
 import Chapa from '../model/chapaModel.js'
 
 export default {
+    async getUserHistory(req,res){
+        const data = await Chapa.find({userId: req.user._id}).populate('carId').sort({createdAt: "desc"}).lean();
+        const count = await Chapa.countDocuments({userId: req.user._id});
+        res.render("Mybooking.ejs", {History: data, count: count});
 
+
+    }
+,
     async getOrderMessage (req,res){
         try{
          //   const targetOrder = req.params.id

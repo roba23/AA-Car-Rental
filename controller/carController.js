@@ -51,7 +51,7 @@ export default {
         }
 
     },
-   
+    
     async moreDetail(req,res){
         try{
 
