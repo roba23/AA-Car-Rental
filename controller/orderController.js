@@ -8,9 +8,15 @@ import Chapa from '../model/chapaModel.js'
 
 export default {
     async getUserHistory(req,res){
+        let role = null;
+            if(req.user){
+                   role = req.user.role;
+               
+            }
         const data = await Chapa.find({userId: req.user._id}).populate('carId').sort({createdAt: "desc"}).lean();
         const count = await Chapa.countDocuments({userId: req.user._id});
-        res.render("Mybooking.ejs", {History: data, count: count});
+         const user = req.user;
+        res.render("Mybooking.ejs", {History: data, count: count, role: role, user});
 
 
     }
@@ -19,8 +25,8 @@ export default {
         try{
          //   const targetOrder = req.params.id
             const order = await Chapa.find({ status: "pending" }).populate('carId').sort({createdAt: "desc"}).lean();
-            
-            return res.render('order', {orders: order})  // orders.carId.Model
+             const user = req.user;
+            return res.render('order', {orders: order, role:"admin", user})  // orders.carId.Model
             
         } catch(err){
             console.log(err)
@@ -30,11 +36,16 @@ export default {
     
     async getOrderHistory (req,res){
         try{
-
+            let role = null;
+            if(req.user){
+                   role = req.user.role;
+               
+            }
+         
             const history = await Chapa.find( { $or:[ {status: "success"} , {status: "failed"} ] }).populate('carId').sort({createdAt: "desc"}).lean();
             const count = await Chapa.countDocuments( { $or:[ {status: "success"} , {status: "failed"} ] } )
-
-            return res.render('orderHistory', {History: history, count})  // orders.carId.Model
+             const user = req.user;
+            return res.render('orderHistory', {History: history, count, role: role, user})  // orders.carId.Model
             
         } catch(err){
             console.log(err)
@@ -134,7 +145,7 @@ export default {
                     sort:{_id: -1},
                     upsert: false
                 } );
-            console.log("the car id i found is:", theOrder.carId);
+           
         
             await car.findByIdAndUpdate( theOrder.carId,
                 { $set:
