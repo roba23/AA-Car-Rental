@@ -68,7 +68,7 @@ export default  {
                       
         let role; 
         const checkDb = await user.find({});
-        if(checkDb.length === 2){
+        if(checkDb.length === 0){
             role = "admin";
         }
         else{
