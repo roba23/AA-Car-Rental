@@ -36,8 +36,8 @@
             <div class="filter-group">
               <h4>Car type</h4>
               <label class="filter-option">
-                <input type="radio" name="filter"  onClick="window.location.href='/' " >
-                All cars
+                <input type="radio" name="filter" value="" <%=!locals.selectedFilter ? 'checked' : '' %>
+                onClick="window.location.href='/' " >All cars
               </label>
               <label class="filter-option">
                 <input type="radio" name="filter" value="suv" <%=selectedFilter==='suv' ? 'checked' : '' %>
@@ -59,12 +59,15 @@
             <div class="filter-group">
               <h4>Monthly price</h4>
               <label class="filter-option">
-                <input type="radio" name="price" value="0-1000" onChange="this.form.submit()">Under $1,000
+                <input type="radio" name="price" value="0-1000"   <%= selectedPrice === ' 0- 1000' ? 'checked' : '' %>
+                onChange="this.form.submit()">Under $1,000
               </label><label class="filter-option">
-                <input type="radio" name="price" value="1000-10000" onChange="this.form.submit()">$1,000 – $10,000
+                <input type="radio" name="price" value="1000-10000" <%= selectedPrice === ' 1000 - 10000' ? 'checked' : '' %>
+                onChange="this.form.submit()">$1,000 – $10,000
               </label>
               <label class="filter-option">
-                <input type="radio" name="price" value="10000-50000" onChange="this.form.submit()">$10,000 – $50,000
+                <input type="radio" name="price" value="10000-50000"  <%= selectedPrice=== ' 10000 - 50000' ? 'checked' : '' %>
+                onChange="this.form.submit()">$10,000 – $50,000
               </label>
             </div>
           </form>
