@@ -28,18 +28,18 @@ export default {
                 const [minPrice, maxPrice] = price.split('-');
 
                 data = await car.find({priceMonthly: { $gte: Number(minPrice), $lte: Number(maxPrice) }}).populate('userId', 'role').sort({createdAt: "desc"}).lean();
-                return res.render("homePage.ejs", { data: data, role: role, selectedFilter: '', selectedPrice: price, user });
+                return res.render("homePage.ejs", { data: data, role: role, selectedFilter: '', user });
             }
 
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
                 data = await car.find({type: filter}).populate([ 'orderId', {path: 'userId', select: 'role'} ]).sort({createdAt: "desc"}).lean();
-                return res.render("homePage.ejs", { data: data, selectedFilter: filter, selectedPrice: price, role: role, user });
+                return res.render("homePage.ejs", { data: data, selectedFilter: filter, role: role, user });
 
             }
 
             data = await car.find({}).populate('userId').sort({createdAt: "desc"}).lean();
-            return res.render("homePage.ejs", { data: data, selectedFilter: '', selectedPrice: price,  user , role: role }) 
+            return res.render("homePage.ejs", { data: data, selectedFilter: '', user , role: role }) 
         }
         catch(error){
              console.log("Error caught in getHomepage catch block:", error);
