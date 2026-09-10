@@ -15,7 +15,8 @@
       <% if (locals.data) { %>
         <div class="detail-grid"><img class="detail-photo" src="<%= data.imgUrl %>" alt="<%= data.name %>">
           <div>
-            <section class="detail-panel"><span class="status <%= data.status ? '' : 'out' %>">
+            <section class="detail-panel">
+            <span class="status <%= data.status ? '' : 'out' %>">
                 <%= data.status === "success"  ? 'Available to book' : 'Currently unavailable' %>
               </span>
               <h1>

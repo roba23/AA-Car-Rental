@@ -20,26 +20,25 @@ export default {
                    role = req.user.role;
                
             }
+            const user = req.user;
             let {filter} = req.query;
             if(Array.isArray(filter)){
           
                 data = await car.find({priceDaily:{$lte: filter[1], $gte: filter[0]}}).populate('userId', 'role').sort({createdAt: "desc"}).lean();
-                return res.render("homePage.ejs", {data: data, role: role});
+                return res.render("homePage.ejs", {data: data, role: role, user});
              
                 
             }
             if(typeof filter === 'string'){
                 console.log("filter is:", filter);
                 data = await car.find({type: filter}).populate([ 'orderId', {path: 'userId', select: 'role'} ]).sort({createdAt: "desc"}).lean();
-                return res.render("homePage.ejs", {data: data, selectedFilter: filter, role: role});
+                return res.render("homePage.ejs", {data: data, selectedFilter: filter, role: role, user});
 
             }
 
             
-            data = await car.find({}).populate('userId', 'role').sort({createdAt: "desc"}).lean();;
-            const user = req.user;
-          
-            return res.render("homePage.ejs", {data: data, selectedFilter: '', user, role: role}) 
+            data = await car.find({}).populate('userId').sort({createdAt: "desc"}).lean();
+            return res.render("homePage.ejs", {data: data, selectedFilter: '', user , role: role}) 
         }
         catch(error){
              console.log("Error caught in getHomepage catch block:", error);
