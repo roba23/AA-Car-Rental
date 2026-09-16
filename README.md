@@ -25,11 +25,11 @@ A car rental web application where customers can browse available vehicles, filt
 | Expiry date | `12/34` |
 
 ### Test with a phone payment
-|Telebirr
+Telebirr
 Phone: 0900123456
 Phone: 0900112233
 
-|Mpesa
+Mpesa
 Phone: 0700123456
 Phone: 0700112233
 
