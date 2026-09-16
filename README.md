@@ -25,3 +25,27 @@ A car rental web application where customers can browse available vehicles, filt
 | Expiry date | `12/34` |
 
 ### Test with a phone payment
+|Telebirr
+Phone: 0900123456
+Phone: 0900112233
+
+|Mpesa
+Phone: 0700123456
+Phone: 0700112233
+
+## Collaboration
+
+AA Car Rental was developed collaboratively by Bereket Woldemariyam (@bereket2114) and Robel (@roba23) through paired programming and live screen-sharing sessions.
+
+### Shared contributions
+
+- Co-developed backend order workflows
+- Integrated the Chapa sandbox payment flow
+- Implemented admin order review, approval, and rejection workflows
+- Built and tested booking features together
+
+### Bereket Woldemariyam's contributions
+
+- Implemented logic that prevents users from ordering unavailable cars
+- Built the order-history page
+- Contributed to backend order logic, testing, and feature discussions
