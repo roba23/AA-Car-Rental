@@ -12,7 +12,7 @@ router.get("/addCar", isAdmin , carController.carAddForm);
 router.delete("/addCar/delete/:id", isAdmin , carController.deletePost);
 
 
-router.post("/addCar", multer.single('file'),carController.addCar);
+router.post("/addCar", multer.single('file') ,carController.addCar);
 router.post("/search", carController.search);
 
 //Order routes

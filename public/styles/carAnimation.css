@@ -1,0 +1,50 @@
+
+/* Car animation area */
+.car-animation {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  min-width: 0;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Do not crop the rotating vehicle */
+  overflow: visible;
+}
+
+/* Transparent rotating car */
+.car-animation video {
+  display: block;
+  width: 90%;
+  max-width: 850px;
+  height: auto;
+
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+
+  /* Prevent unwanted clipping from the video box */
+  border: 0;
+  outline: 0;
+}
+
+/* Keep your existing hero text readable */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+/* Keep the video integrated with the hero background */
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
